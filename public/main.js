@@ -20,3 +20,9 @@ socket.on('time', function(data) {
     console.log(data)
 
 })
+
+    socket.on('users', function(data) {
+
+        console.log(data)
+
+    })
