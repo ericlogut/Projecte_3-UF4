@@ -16,6 +16,9 @@ function enviar() {
     io.emit("time",{"message": "Mañana hay examen"});
 }
 
+
+
+
 var usuaris = [];
 
 io.on("connection", (socket) => {
@@ -34,6 +37,19 @@ io.on("connection", (socket) => {
 
             // Totes les funcions disponibles les tenim a
             //  https://socket.io/docs/v4/emit-cheatsheet/
+
+            io.on("connection", (socket) => {
+                const users = [];
+                for (let [id, socket] of io.of("/").sockets) {
+                  users.push({
+                    userID: id,
+                    username: socket.username,
+                  });
+                }
+                socket.emit("users", users);
+                // ...
+              });
+            
     })
     socket.on("disconnect",function() {
         console.log("usuari desconnectat");
