@@ -6,7 +6,7 @@ const app = express();
 const httpServer = createServer(app);
 
 app.use(express.static("public"));
-
+// Hola
 const io = new Server(httpServer, {});
 
 var idInterval = setInterval(enviar, 5000);
