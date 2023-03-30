@@ -2,9 +2,22 @@
 <html>
   <head>
     <title>Juego de preguntas</title>
+    <style>
+      #pregunta,
+      #respuestas
+       {
+        display: none;
+      }
+    </style>
   </head>
   <body>
     <h1>Juego de preguntas</h1>
+
+    <div id="formularioRegistro">
+      <label for="nombre">Ingrese su nombre:</label>
+      <input type="text" id="nombre" />
+      <button onclick="unirseAlJuego()">Unirse al juego</button>
+    </div>
 
     <div id="pregunta"></div>
     <div id="respuestas"></div>
@@ -14,9 +27,15 @@
     <script>
       const socket = io();
 
-      const nombre = prompt("Por favor, ingrese su nombre:");
-      socket.emit("nuevoJugador", nombre);
-
+      function unirseAlJuego() {
+        const nombre = document.getElementById("nombre").value;
+        if (nombre) {
+          document.getElementById("formularioRegistro").style.display = "none";
+          document.getElementById("pregunta").style.display = "block";
+          document.getElementById("respuestas").style.display = "block";
+          socket.emit("nuevoJugador", nombre);
+        }
+      }
 
       // Manejador de eventos para cuando se recibe una nueva pregunta
       socket.on("nuevaPregunta", (pregunta) => {
@@ -45,7 +64,7 @@
         Object.keys(jugadores).forEach((jugadorId) => {
           const jugador = jugadores[jugadorId];
           const jugadorEl = document.createElement("div");
-          jugadorEl.innerText = `Jugador ${jugadorId}: ${jugador.puntos} puntos`;
+          jugadorEl.innerText = `${jugador.nombre}: ${jugador.puntos} puntos`;
           puntuacionEl.appendChild(jugadorEl);
         });
       });
