@@ -1,10 +1,50 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.min.js"></script>
-        <script src="main.js" ></script>   
-    </head>
-    <body>
+  <head>
+    <title>Juego de preguntas</title>
+  </head>
+  <body>
+    <h1>Juego de preguntas</h1>
 
-    </body>
+    <div id="pregunta"></div>
+    <div id="respuestas"></div>
+    <div id="puntuacion"></div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+
+      // Manejador de eventos para cuando se recibe una nueva pregunta
+      socket.on("nuevaPregunta", (pregunta) => {
+        const preguntaEl = document.getElementById("pregunta");
+        const respuestasEl = document.getElementById("respuestas");
+
+        // Mostrar la pregunta
+        preguntaEl.innerText = pregunta.pregunta;
+
+        // Mostrar las opciones de respuesta
+        respuestasEl.innerHTML = "";
+        pregunta.respuestas.forEach((respuesta) => {
+          const opcionEl = document.createElement("button");
+          opcionEl.innerText = respuesta;
+          opcionEl.addEventListener("click", () => {
+            socket.emit("enviarRespuesta", respuesta);
+          });
+          respuestasEl.appendChild(opcionEl);
+        });
+      });
+
+      // Manejador de eventos para actualizar la puntuación
+      socket.on("actualizarPuntuacion", (jugadores) => {
+        const puntuacionEl = document.getElementById("puntuacion");
+        puntuacionEl.innerHTML = "";
+        Object.keys(jugadores).forEach((jugadorId) => {
+          const jugador = jugadores[jugadorId];
+          const jugadorEl = document.createElement("div");
+          jugadorEl.innerText = `Jugador ${jugadorId}: ${jugador.puntos} puntos`;
+          puntuacionEl.appendChild(jugadorEl);
+        });
+      });
+    </script>
+  </body>
 </html>
