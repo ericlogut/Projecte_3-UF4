@@ -35,12 +35,16 @@ const preguntas = [
 
 // Objeto para guardar los jugadores conectados
 const jugadores = {};
+let preguntaActualIndex = 0;
+
 
 // Función para obtener una pregunta aleatoria del array de preguntas
-function obtenerPreguntaAleatoria() {
-  const index = Math.floor(Math.random() * preguntas.length);
-  return preguntas[index];
+function obtenerPreguntaActual() {
+  const pregunta = preguntas[preguntaActualIndex];
+  preguntaActualIndex = (preguntaActualIndex + 1) % preguntas.length;
+  return pregunta;
 }
+
 
 // Función para comprobar si una respuesta es correcta
 function comprobarRespuesta(pregunta, respuesta) {
@@ -51,14 +55,20 @@ function comprobarRespuesta(pregunta, respuesta) {
 io.on("connection", (socket) => {
   console.log(`Jugador conectado: ${socket.id}`);
 
-  // Guardar al jugador en el objeto de jugadores
+// Guardar al jugador en el objeto de jugadores
+socket.on("nuevoJugador", (nombre) => {
+  console.log(`Jugador conectado: ${socket.id} (${nombre})`);
+
   jugadores[socket.id] = {
+    nombre: nombre,
     puntos: 0,
   };
+});
 
   // Enviar la pregunta inicial al jugador
-  const pregunta = obtenerPreguntaAleatoria();
+  const pregunta = obtenerPreguntaActual();
   socket.emit("nuevaPregunta", pregunta);
+  
 
   // Manejador de eventos para cuando un jugador envía una respuesta
   socket.on("enviarRespuesta", (respuesta) => {
@@ -72,7 +82,7 @@ io.on("connection", (socket) => {
       jugador.puntos++;
 
       // Enviar una nueva pregunta al jugador
-      const nuevaPregunta = obtenerPreguntaAleatoria();
+      const nuevaPregunta = obtenerPreguntaActual();
       socket.emit("nuevaPregunta", nuevaPregunta);
 
       // Emitir un evento a todos los jugadores para actualizar la puntuación
