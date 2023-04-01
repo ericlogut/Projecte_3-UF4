@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 });
 
 // Array de preguntas para el juego
-const preguntas = [
+let preguntas = [
   {
     pregunta: "¿Cuál es la capital de España?",
     respuestas: ["Madrid", "Barcelona", "Sevilla", "Valencia"],
@@ -66,7 +66,7 @@ socket.on("nuevoJugador", (nombre) => {
 });
 
   // Enviar la pregunta inicial al jugador
-  const pregunta = obtenerPreguntaActual();
+  let pregunta = obtenerPreguntaActual();
   socket.emit("nuevaPregunta", pregunta);
   
 
@@ -80,20 +80,18 @@ socket.on("enviarRespuesta", (respuesta) => {
   if (esCorrecta) {
     // Sumar un punto al jugador
     jugador.puntos++;
-  } else {
-    // Obtener una nueva pregunta sin sumar puntos
-    const nuevaPregunta = obtenerPreguntaActual();
-    socket.emit("nuevaPregunta", nuevaPregunta);
-    return; // Salir de la función sin actualizar la puntuación
-  }
+  } 
+
+  // Obtener una nueva pregunta y actualizar la variable preguntaActual
+  pregunta = obtenerPreguntaActual();
 
   // Enviar una nueva pregunta al jugador
-  const nuevaPregunta = obtenerPreguntaActual();
-  socket.emit("nuevaPregunta", nuevaPregunta);
+  socket.emit("nuevaPregunta", pregunta);
 
   // Emitir un evento a todos los jugadores para actualizar la puntuación
   io.emit("actualizarPuntuacion", jugadores);
 });
+
 
     // Manejador de eventos para cuando un jugador se desconecta
     socket.on("disconnect", () => {
