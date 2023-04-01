@@ -70,25 +70,31 @@ socket.on("nuevoJugador", (nombre) => {
   socket.emit("nuevaPregunta", pregunta);
   
 
-  // Manejador de eventos para cuando un jugador envía una respuesta
-  socket.on("enviarRespuesta", (respuesta) => {
-    const jugador = jugadores[socket.id];
+// Manejador de eventos para cuando un jugador envía una respuesta
+socket.on("enviarRespuesta", (respuesta) => {
+  const jugador = jugadores[socket.id];
 
-    // Comprobar si la respuesta es correcta
-    const esCorrecta = comprobarRespuesta(pregunta, respuesta);
+  // Comprobar si la respuesta es correcta
+  const esCorrecta = comprobarRespuesta(pregunta, respuesta);
 
-    if (esCorrecta) {
-      // Sumar un punto al jugador
-      jugador.puntos++;
+  if (esCorrecta) {
+    // Sumar un punto al jugador
+    jugador.puntos++;
+  } else {
+    // Obtener una nueva pregunta sin sumar puntos
+    const nuevaPregunta = obtenerPreguntaActual();
+    socket.emit("nuevaPregunta", nuevaPregunta);
+    return; // Salir de la función sin actualizar la puntuación
+  }
 
-      // Enviar una nueva pregunta al jugador
-      const nuevaPregunta = obtenerPreguntaActual();
-      socket.emit("nuevaPregunta", nuevaPregunta);
+  // Enviar una nueva pregunta al jugador
+  const nuevaPregunta = obtenerPreguntaActual();
+  socket.emit("nuevaPregunta", nuevaPregunta);
 
-      // Emitir un evento a todos los jugadores para actualizar la puntuación
-      io.emit("actualizarPuntuacion", jugadores);
-    }
-  });
+  // Emitir un evento a todos los jugadores para actualizar la puntuación
+  io.emit("actualizarPuntuacion", jugadores);
+});
+
     // Manejador de eventos para cuando un jugador se desconecta
     socket.on("disconnect", () => {
       console.log(`Jugador desconectado: ${socket.id}`);
