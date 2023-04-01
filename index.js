@@ -63,6 +63,9 @@ socket.on("nuevoJugador", (nombre) => {
     nombre: nombre,
     puntos: 0,
   };
+  // Enviar historial de usuarios a todos los clientes
+  const historialUsuarios = Object.values(jugadores).map((jugador) => jugador.nombre);
+  io.emit("actualizarHistorialUsuarios", historialUsuarios);
 });
 
   // Enviar la pregunta inicial al jugador
@@ -99,6 +102,9 @@ socket.on("enviarRespuesta", (respuesta) => {
   
       // Eliminar al jugador del objeto de jugadores
       delete jugadores[socket.id];
+       // Enviar historial de usuarios a todos los clientes
+    const historialUsuarios = Object.values(jugadores).map((jugador) => jugador.nombre);
+    io.emit("actualizarHistorialUsuarios", historialUsuarios);
   
       // Emitir un evento a todos los jugadores para actualizar la puntuación
       io.emit("actualizarPuntuacion", jugadores);

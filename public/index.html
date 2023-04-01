@@ -8,6 +8,26 @@
        {
         display: none;
       }
+      #historialUsuarios {
+        position: fixed;
+        right: 0;
+        top: 0;
+        width: 200px;
+        height: 100%;
+        background-color: #eee;
+        overflow-y: scroll;
+      }
+      #historialUsuarios ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      #historialUsuarios li {
+        margin: 5px;
+        padding: 5px;
+        background-color: #fff;
+        border-radius: 5px;
+      }
     </style>
   </head>
   <body>
@@ -22,6 +42,11 @@
     <div id="pregunta"></div>
     <div id="respuestas"></div>
     <div id="puntuacion"></div>
+    
+    <div id="historialUsuarios">
+      <h2>Historial de jugadores</h2>
+      <ul></ul>
+    </div>
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
@@ -68,6 +93,19 @@
           puntuacionEl.appendChild(jugadorEl);
         });
       });
+
+      // Manejador de eventos para actualizar el historial de usuarios
+      socket.on("actualizarHistorialUsuarios", (historialUsuarios) => {
+        const historialUsuariosEl = document.getElementById("historialUsuarios");
+        historialUsuariosEl.innerHTML = "";
+
+        historialUsuarios.forEach((usuario) => {
+          const usuarioEl = document.createElement("div");
+          usuarioEl.innerText = usuario + " se ha añadido a la partida";
+          historialUsuariosEl.appendChild(usuarioEl);
+        });
+      });
+
     </script>
   </body>
 </html>
