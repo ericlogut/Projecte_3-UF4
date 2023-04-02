@@ -1,62 +1,124 @@
 const express = require("express");
-const { createServer } = require("http");
-const { Server } = require("socket.io");
+const http = require("http");
+const socketIo = require("socket.io");
 
 const app = express();
-const httpServer = createServer(app);
+const server = http.createServer(app);
+const io = socketIo(server);
 
+// Middleware para servir archivos estáticos
 app.use(express.static("public"));
-// Hola
-const io = new Server(httpServer, {});
 
-var idInterval = setInterval(enviar, 5000);
+// Ruta de inicio para el juego
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/public/index.html");
+});
 
-function enviar() {
-    console.log("Enviant missatge")
-    io.emit("time",{"message": "Mañana hay examen"});
+// Array de preguntas para el juego
+let preguntas = [
+  {
+    pregunta: "¿Cuál es la capital de España?",
+    respuestas: ["Madrid", "Barcelona", "Sevilla", "Valencia"],
+    respuestaCorrecta: "Madrid",
+  },
+  {
+    pregunta: "¿En qué país se encuentra la Torre Eiffel?",
+    respuestas: ["Italia", "Francia", "Alemania", "Reino Unido"],
+    respuestaCorrecta: "Francia",
+  },
+  {
+    pregunta: "¿Cuál es el río más largo del mundo?",
+    respuestas: ["Nilo", "Amazonas", "Misisipi", "Yangtse"],
+    respuestaCorrecta: "Amazonas",
+  },
+];
+
+// Objeto para guardar los jugadores conectados
+const jugadores = {};
+let preguntaActualIndex = 0;
+
+
+// Función para obtener una pregunta aleatoria del array de preguntas
+function obtenerPreguntaActual() {
+  const pregunta = preguntas[preguntaActualIndex];
+  preguntaActualIndex = (preguntaActualIndex + 1) % preguntas.length;
+  return pregunta;
 }
 
 
 
 
-var usuaris = [];
 
+// Función para comprobar si una respuesta es correcta
+function comprobarRespuesta(pregunta, respuesta) {
+  return pregunta.respuestaCorrecta === respuesta;
+}
+
+// Manejador de eventos para cuando un jugador se conecta
 io.on("connection", (socket) => {
-  
-    console.log('Connectat un client...')
+  console.log(`Jugador conectado: ${socket.id}`);
 
-    socket.on("nickname", function(data) {
-            console.log(data.nickname)
-            
-            socket.data.nickname = data.nickname;
-            // respondre al que ha enviat
-            socket.emit("nickname rebut",{"response":"ok"})
+// Guardar al jugador en el objeto de jugadores
+socket.on("nuevoJugador", (nombre) => {
+  console.log(`Jugador conectado: ${socket.id} (${nombre})`);
 
-            // respondre a la resta de clients menys el que ha enviat
-            socket.broadcast.emit("nickname rebut",{"response":data.nickname});
-
-            // Totes les funcions disponibles les tenim a
-            //  https://socket.io/docs/v4/emit-cheatsheet/
-
-            io.on("connection", (socket) => {
-                const users = [];
-                for (let [id, socket] of io.of("/").sockets) {
-                  users.push({
-                    userID: id,
-                    username: socket.username,
-                  });
-                }
-                socket.emit("users", users);
-                // ...
-              });
-            
-    })
-    socket.on("disconnect",function() {
-        console.log("usuari desconnectat");
-    })
+  jugadores[socket.id] = {
+    nombre: nombre,
+    puntos: 0,
+  };
+  // Enviar historial de usuarios a todos los clientes
+  const historialUsuarios = Object.values(jugadores).map((jugador) => jugador.nombre);
+  io.emit("actualizarHistorialUsuarios", historialUsuarios);
 });
 
-httpServer.listen(3000, ()=>
-    console.log(`Server listening at http://localhost:3000`)
-);
+  // Enviar la pregunta inicial al jugador
+  let pregunta = obtenerPreguntaActual();
+  socket.emit("nuevaPregunta", pregunta);
+  
 
+// Manejador de eventos para cuando un jugador envía una respuesta
+socket.on("enviarRespuesta", (respuesta) => {
+  const jugador = jugadores[socket.id];
+
+  // Comprobar si la respuesta es correcta
+  const esCorrecta = comprobarRespuesta(pregunta, respuesta);
+
+  if (esCorrecta) {
+    // Sumar un punto al jugador
+    jugador.puntos++;
+  } 
+
+  // Obtener una nueva pregunta y actualizar la variable preguntaActual
+  pregunta = obtenerPreguntaActual();
+
+  // Enviar una nueva pregunta al jugador
+  socket.emit("nuevaPregunta", pregunta);
+
+  // Emitir un evento a todos los jugadores para actualizar la puntuación
+  io.emit("actualizarPuntuacion", jugadores);
+});
+
+
+    // Manejador de eventos para cuando un jugador se desconecta
+    socket.on("disconnect", () => {
+      console.log(`Jugador desconectado: ${socket.id}`);
+  
+      // Eliminar al jugador del objeto de jugadores
+      delete jugadores[socket.id];
+       // Enviar historial de usuarios a todos los clientes
+    const historialUsuarios = Object.values(jugadores).map((jugador) => jugador.nombre);
+    io.emit("actualizarHistorialUsuarios", historialUsuarios);
+  
+      // Emitir un evento a todos los jugadores para actualizar la puntuación
+      io.emit("actualizarPuntuacion", jugadores);
+    });
+  });
+  
+  // Iniciar el servidor
+  const PORT = process.env.PORT || 3000;
+  server.listen(PORT, () => {
+    console.log(`Servidor escuchando en el puerto ${PORT}`);
+  });
+  
+
+ 

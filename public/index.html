@@ -1,13 +1,111 @@
 <!DOCTYPE html>
 <html>
-    <head>
+  <head>
+    <title>Juego de preguntas</title>
+    <style>
+      #pregunta,
+      #respuestas
+       {
+        display: none;
+      }
+      #historialUsuarios {
+        position: fixed;
+        right: 0;
+        top: 0;
+        width: 200px;
+        height: 100%;
+        background-color: #eee;
+        overflow-y: scroll;
+      }
+      #historialUsuarios ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      #historialUsuarios li {
+        margin: 5px;
+        padding: 5px;
+        background-color: #fff;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Juego de preguntas</h1>
 
-    </head>
-    <body>
-        Client
-        Entra el teu nom <input id="nicknameInput" type="text">
-        <button id="sendButton">Enviar</button>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.min.js"></script>
-    <script src="main.js" ></script>   
-    </body>
+    <div id="formularioRegistro">
+      <label for="nombre">Ingrese su nombre:</label>
+      <input type="text" id="nombre" />
+      <button onclick="unirseAlJuego()">Unirse al juego</button>
+    </div>
+
+    <div id="pregunta"></div>
+    <div id="respuestas"></div>
+    <div id="puntuacion"></div>
+    
+    <div id="historialUsuarios">
+      <h2>Historial de jugadores</h2>
+      <ul></ul>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+
+      function unirseAlJuego() {
+        const nombre = document.getElementById("nombre").value;
+        if (nombre) {
+          document.getElementById("formularioRegistro").style.display = "none";
+          document.getElementById("pregunta").style.display = "block";
+          document.getElementById("respuestas").style.display = "block";
+          socket.emit("nuevoJugador", nombre);
+        }
+      }
+
+      // Manejador de eventos para cuando se recibe una nueva pregunta
+      socket.on("nuevaPregunta", (pregunta) => {
+        const preguntaEl = document.getElementById("pregunta");
+        const respuestasEl = document.getElementById("respuestas");
+
+        // Mostrar la pregunta
+        preguntaEl.innerText = pregunta.pregunta;
+
+        // Mostrar las opciones de respuesta
+        respuestasEl.innerHTML = "";
+        pregunta.respuestas.forEach((respuesta) => {
+          const opcionEl = document.createElement("button");
+          opcionEl.innerText = respuesta;
+          opcionEl.addEventListener("click", () => {
+            socket.emit("enviarRespuesta", respuesta);
+          });
+          respuestasEl.appendChild(opcionEl);
+        });
+      });
+
+      // Manejador de eventos para actualizar la puntuación
+      socket.on("actualizarPuntuacion", (jugadores) => {
+        const puntuacionEl = document.getElementById("puntuacion");
+        puntuacionEl.innerHTML = "";
+        Object.keys(jugadores).forEach((jugadorId) => {
+          const jugador = jugadores[jugadorId];
+          const jugadorEl = document.createElement("div");
+          jugadorEl.innerText = `${jugador.nombre}: ${jugador.puntos} puntos`;
+          puntuacionEl.appendChild(jugadorEl);
+        });
+      });
+
+      // Manejador de eventos para actualizar el historial de usuarios
+      socket.on("actualizarHistorialUsuarios", (historialUsuarios) => {
+        const historialUsuariosEl = document.getElementById("historialUsuarios");
+        historialUsuariosEl.innerHTML = "";
+
+        historialUsuarios.forEach((usuario) => {
+          const usuarioEl = document.createElement("div");
+          usuarioEl.innerText = usuario + " se ha añadido a la partida";
+          historialUsuariosEl.appendChild(usuarioEl);
+        });
+      });
+
+    </script>
+  </body>
 </html>
