@@ -44,6 +44,7 @@
     <div id="puntuacion"></div>
     <div style="display: none;" id="cronometro">10</div>
     <div id="tiempo-restante"></div>
+    <div id="tiempo-transcurrido"></div>
     
     <div id="historialUsuarios">
       <h2>Historial de jugadores</h2>
@@ -52,12 +53,21 @@
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
+      let fechaRegistro = new Date();
       const socket = io();
       const DURACION_TEMPORIZADOR = 10000; // Duración del temporizador en milisegundos
       let tiempoRestante = DURACION_TEMPORIZADOR / 1000; // Dividir por 1000 para convertir de milisegundos a segundos
        let temporizador; // Variable para el temporizador
        let usuarioRegistrado = false; // Variable para verificar si el usuario se ha registrado
        const tiempoLimite = 10;
+
+       function actualizarTiempoTranscurrido() {
+      const tiempoTranscurridoEl = document.getElementById("tiempo-transcurrido");
+      const tiempoTranscurrido = Math.floor((new Date() - fechaRegistro) / 1000); // Obtener tiempo transcurrido en segundos
+      tiempoTranscurridoEl.innerText = `Tiempo transcurrido: ${tiempoTranscurrido} segundos`;
+}
+
+
 
       function unirseAlJuego() {
         const nombre = document.getElementById("nombre").value;
@@ -67,19 +77,35 @@
           document.getElementById("respuestas").style.display = "block";
           socket.emit("nuevoJugador", nombre);
           usuarioRegistrado = true; // Establecer la variable en true cuando el usuario se registra
+          fechaRegistro = new Date();
 
           // Agregar temporizador para terminar la partida después de un minuto
           setTimeout(() => {
             detenerPartida();
           }, 60000); // 60000 milisegundos = 1 minuto
+
+          // Iniciar intervalo para actualizar el tiempo transcurrido
+    intervaloTiempoTranscurrido = setInterval(() => {
+      tiempoTranscurrido = Math.floor((new Date() - fechaRegistro) / 1000);
+      actualizarTiempoTranscurrido();
+    }, 1000);
       }
   }
+  function detenerTemporizador() {
+  clearInterval(intervaloTiempoTranscurrido);
+}
   function detenerPartida() {
   // Detener el temporizador actual
   clearInterval(temporizador);
+  detenerTemporizador();
+  socket.emit("detenerPartida");
 
   // Emitir evento para indicar que se debe detener la partida
-  socket.emit("detenerPartida");
+}
+
+function actualizarTiempoTranscurrido() {
+  const tiempoTranscurridoEl = document.getElementById("tiempo-transcurrido");
+  tiempoTranscurridoEl.innerText = `Tiempo transcurrido: ${tiempoTranscurrido} segundos`;
 }
 
       // Función para actualizar el cronómetro
