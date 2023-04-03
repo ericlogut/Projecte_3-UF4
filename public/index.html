@@ -42,7 +42,8 @@
     <div id="pregunta"></div>
     <div id="respuestas"></div>
     <div id="puntuacion"></div>
-    <div id="cronometro">10</div>
+    <div style="display: none;" id="cronometro">10</div>
+    <div id="tiempo-restante"></div>
     
     <div id="historialUsuarios">
       <h2>Historial de jugadores</h2>
@@ -52,6 +53,11 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
       const socket = io();
+      const DURACION_TEMPORIZADOR = 10000; // Duración del temporizador en milisegundos
+      let tiempoRestante = DURACION_TEMPORIZADOR / 1000; // Dividir por 1000 para convertir de milisegundos a segundos
+       let temporizador; // Variable para el temporizador
+       let usuarioRegistrado = false; // Variable para verificar si el usuario se ha registrado
+       const tiempoLimite = 10;
 
       function unirseAlJuego() {
         const nombre = document.getElementById("nombre").value;
@@ -60,28 +66,82 @@
           document.getElementById("pregunta").style.display = "block";
           document.getElementById("respuestas").style.display = "block";
           socket.emit("nuevoJugador", nombre);
+          usuarioRegistrado = true; // Establecer la variable en true cuando el usuario se registra
         }
       }
 
+      // Función para actualizar el cronómetro
+      function actualizarCronometro() {
+  // Obtener los elementos del cronómetro y el tiempo restante
+  const cronometroEl = document.getElementById("cronometro");
+  const tiempoRestanteEl = document.getElementById("tiempo-restante");
+
+  // Si el usuario no se ha registrado, no iniciar el temporizador
+  if (!usuarioRegistrado) {
+    return;
+  }
+
+  // Obtener el valor actual del cronómetro
+  let tiempoActual = parseInt(cronometroEl.innerText);
+
+  // Si se agota el tiempo, detener el temporizador
+  if (tiempoActual <= 0) {
+    clearInterval(temporizador);
+    tiempoActual = 0;
+    socket.emit("enviarRespuesta", "");
+    socket.emit("siguientePregunta");
+  } else {
+    // Reducir el tiempo restante
+    tiempoActual--;
+  }
+
+  // Actualizar el valor del cronómetro y el tiempo restante
+  cronometroEl.innerText = tiempoActual;
+  tiempoRestanteEl.innerText = `Tiempo restante: ${tiempoActual} segundos`;
+}
+
       // Manejador de eventos para cuando se recibe una nueva pregunta
       socket.on("nuevaPregunta", (pregunta) => {
-        const preguntaEl = document.getElementById("pregunta");
-        const respuestasEl = document.getElementById("respuestas");
+  const preguntaEl = document.getElementById("pregunta");
+  const respuestasEl = document.getElementById("respuestas");
 
-        // Mostrar la pregunta
-        preguntaEl.innerText = pregunta.pregunta;
+  // Eliminar el temporizador previo si existe
+  clearInterval(temporizador);
 
-        // Mostrar las opciones de respuesta
-        respuestasEl.innerHTML = "";
-        pregunta.respuestas.forEach((respuesta) => {
-          const opcionEl = document.createElement("button");
-          opcionEl.innerText = respuesta;
-          opcionEl.addEventListener("click", () => {
-            socket.emit("enviarRespuesta", respuesta);
-          });
-          respuestasEl.appendChild(opcionEl);
-        });
-      });
+  // Establecer el valor del temporizador
+  tiempoRestante = DURACION_TEMPORIZADOR / 1000; // Utilizar la variable global tiempoRestante
+  document.getElementById("cronometro").innerText = tiempoRestante;
+
+  // Actualizar el valor del cronómetro y el tiempo restante cada segundo
+  temporizador = setInterval(() => {
+    tiempoRestante--;
+    actualizarCronometro();
+  }, 1000);
+
+  // Mostrar la pregunta
+  preguntaEl.innerText = pregunta.pregunta;
+
+  // Mostrar las opciones de respuesta
+  respuestasEl.innerHTML = "";
+  pregunta.respuestas.forEach((respuesta) => {
+    const opcionEl = document.createElement("button");
+    opcionEl.innerText = respuesta;
+    opcionEl.addEventListener("click", () => {
+      socket.emit("enviarRespuesta", respuesta);
+
+      // Detener el temporizador
+      clearInterval(temporizador);
+
+      // Restablecer el valor del cronómetro y del tiempo restante
+      document.getElementById("cronometro").innerText = DURACION_TEMPORIZADOR / 1000;
+      document.getElementById("tiempo-restante").innerText = "";
+    });
+    respuestasEl.appendChild(opcionEl);
+  });
+});
+
+
+
 
       // Manejador de eventos para actualizar la puntuación
       socket.on("actualizarPuntuacion", (jugadores) => {

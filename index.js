@@ -37,23 +37,13 @@ let preguntas = [
 const jugadores = {};
 let preguntaActualIndex = 0;
 
-let temporizador;
-const DURACION_TEMPORIZADOR = 10000; // 10 segundos en milisegundos
-
 
 // Función para obtener una pregunta aleatoria del array de preguntas
 function obtenerPreguntaActual() {
   const pregunta = preguntas[preguntaActualIndex];
   preguntaActualIndex = (preguntaActualIndex + 1) % preguntas.length;
-   // Iniciar el temporizador
-   temporizador = setTimeout(() => {
-    // Si el temporizador termina, obtener la siguiente pregunta y enviarla al jugador
-    const siguientePregunta = obtenerPreguntaActual();
-    io.emit("nuevaPregunta", siguientePregunta);
-  }, DURACION_TEMPORIZADOR);
   return pregunta;
 }
-
 
 
 // Función para comprobar si una respuesta es correcta
@@ -95,9 +85,8 @@ socket.on("enviarRespuesta", (respuesta) => {
     jugador.puntos++;
   } 
 
- // Cancelar el temporizador actual y obtener una nueva pregunta
- clearTimeout(temporizador);
- pregunta = obtenerPreguntaActual();
+  // Obtener una nueva pregunta y actualizar la variable preguntaActual
+  pregunta = obtenerPreguntaActual();
 
   // Enviar una nueva pregunta al jugador
   socket.emit("nuevaPregunta", pregunta);
