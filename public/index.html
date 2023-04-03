@@ -67,8 +67,20 @@
           document.getElementById("respuestas").style.display = "block";
           socket.emit("nuevoJugador", nombre);
           usuarioRegistrado = true; // Establecer la variable en true cuando el usuario se registra
-        }
+
+          // Agregar temporizador para terminar la partida después de un minuto
+          setTimeout(() => {
+            detenerPartida();
+          }, 60000); // 60000 milisegundos = 1 minuto
       }
+  }
+  function detenerPartida() {
+  // Detener el temporizador actual
+  clearInterval(temporizador);
+
+  // Emitir evento para indicar que se debe detener la partida
+  socket.emit("detenerPartida");
+}
 
       // Función para actualizar el cronómetro
       function actualizarCronometro() {
