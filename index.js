@@ -14,8 +14,12 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
 });
 
+// Preguntas del JSON
+const preguntasJSON = require('../Projecte_3-UF4/preguntas.json');
+var preguntas = preguntasJSON.Preguntas
+
 // Array de preguntas para el juego
-let preguntas = [
+let preguntas2 = [ 
   {
     pregunta: "¿Cuál es la capital de España?",
     respuestas: ["Madrid", "Barcelona", "Sevilla", "Valencia"],
@@ -36,17 +40,16 @@ let preguntas = [
 // Objeto para guardar los jugadores conectados
 const jugadores = {};
 let preguntaActualIndex = 0;
-
-let temporizador;
-const DURACION_TEMPORIZADOR = 10000; // 10 segundos en milisegundos
+var pregunta = {};
+var DURACION_TEMPORIZADOR = 10000; // 10 segundos en milisegundos
 
 
 // Función para obtener una pregunta aleatoria del array de preguntas
 function obtenerPreguntaActual() {
-  const pregunta = preguntas[preguntaActualIndex];
+  pregunta = preguntas[preguntaActualIndex];
   preguntaActualIndex = (preguntaActualIndex + 1) % preguntas.length;
    // Iniciar el temporizador
-   temporizador = setTimeout(() => {
+   setTimeout(() => {
     // Si el temporizador termina, obtener la siguiente pregunta y enviarla al jugador
     const siguientePregunta = obtenerPreguntaActual();
     io.emit("nuevaPregunta", siguientePregunta);
@@ -76,17 +79,12 @@ socket.on("nuevoJugador", (nombre) => {
   // Enviar historial de usuarios a todos los clientes
   const historialUsuarios = Object.values(jugadores).map((jugador) => jugador.nombre);
   io.emit("actualizarHistorialUsuarios", historialUsuarios);
-});
-
-  // Enviar la pregunta inicial al jugador
-  let pregunta = obtenerPreguntaActual();
-  socket.emit("nuevaPregunta", pregunta);
-  
+});  
 
 // Manejador de eventos para cuando un jugador envía una respuesta
 socket.on("enviarRespuesta", (respuesta) => {
   const jugador = jugadores[socket.id];
-
+  console.log(pregunta)
   // Comprobar si la respuesta es correcta
   const esCorrecta = comprobarRespuesta(pregunta, respuesta);
 
@@ -96,16 +94,24 @@ socket.on("enviarRespuesta", (respuesta) => {
   } 
 
  // Cancelar el temporizador actual y obtener una nueva pregunta
- clearTimeout(temporizador);
- pregunta = obtenerPreguntaActual();
+  //  clearTimeout(temporizador);
+  DURACION_TEMPORIZADOR = 10000;
+  pregunta = obtenerPreguntaActual();
 
   // Enviar una nueva pregunta al jugador
-  socket.emit("nuevaPregunta", pregunta);
+  io.emit("nuevaPregunta", pregunta);
 
   // Emitir un evento a todos los jugadores para actualizar la puntuación
   io.emit("actualizarPuntuacion", jugadores);
 });
 
+
+  socket.on('start', () => {
+    // Enviar la pregunta inicial al jugador
+    let preguntaParaUsar = obtenerPreguntaActual();
+    io.emit("nuevaPregunta", preguntaParaUsar);
+    io.emit('mostrarPreguntaYRespuestas');
+  });
 
     // Manejador de eventos para cuando un jugador se desconecta
     socket.on("disconnect", () => {
@@ -121,6 +127,7 @@ socket.on("enviarRespuesta", (respuesta) => {
       io.emit("actualizarPuntuacion", jugadores);
     });
   });
+  
   
   // Iniciar el servidor
   const PORT = process.env.PORT || 3000;

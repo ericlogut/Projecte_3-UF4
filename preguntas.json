@@ -2,153 +2,153 @@
     "Preguntas": [
         {
             "pregunta": "Quin és el nom del personatge principal del videojoc League of Legends?",
-            "opciones": [
-                "A) Lee Sin",
-                "B) Ezreal",
-                "C) Yasuo",
-                "D) Ahri"
+            "respuestas": [
+                "Lee Sin",
+                "Ezreal",
+                "Yasuo",
+                "Ahri"
             ],
-            "respuesta_correcta": "D) Ahri"
+            "respuestaCorrecta": "Ahri"
         },
         {
             "pregunta": "Quina és la posició més comuna per a Ahri en el camp de batalla?",
-            "opciones": [
-                "A) Suport",
-                "B) Assassin",
-                "C) Mago",
-                "D) Tanque"
+            "respuestas": [
+                "Suport",
+                "Assassin",
+                "Mago",
+                "Tanque"
             ],
-            "respuesta_correcta": "B) Assassin"
+            "respuestaCorrecta": "Assassin"
         },
         {
             "pregunta": "Quin equip ha guanyat més títols mundials de League of Legends?",
-            "opciones": [
-                "A) SK Telecom T1",
-                "B) Samsung Galaxy",
-                "C) Invictus Gaming",
-                "D) G2 Esports"
+            "respuestas": [
+                "SK Telecom T1",
+                "Samsung Galaxy",
+                "Invictus Gaming",
+                "G2 Esports"
             ],
-            "respuesta_correcta": "A) SK Telecom T1"
+            "respuestaCorrecta": "SK Telecom T1"
         },
         {
             "pregunta": "Quin personatge té la capacitat de regenerar-se de manera automàtica en League of Legends?",
-            "opciones": [
-                "A) Vladimir",
-                "B) Darius",
-                "C) Olaf",
-                "D) Rengar"
+            "respuestas": [
+                "Vladimir",
+                "Darius",
+                "Olaf",
+                "Rengar"
             ],
-            "respuesta_correcta": "A) Vladimir"
+            "respuestaCorrecta": "Vladimir"
         },
         {
             "pregunta": "Quina posició és la més comuna per a un personatge com Jinx?",
-            "opciones": [
-                "A) AD Carry",
-                "B) Suport",
-                "C) Assassin",
-                "D) Tanque"
+            "respuestas": [
+                "AD Carry",
+                "Suport",
+                "Assassin",
+                "Tanque"
             ],
-            "respuesta_correcta": "A) AD Carry"
+            "respuestaCorrecta": "AD Carry"
         },
         {
             "pregunta": "Quin personatge pot crear portes per a ell i el seu equip?",
-            "opciones": [
-                "A) Bard",
-                "B) LeBlanc",
-                "C) Zoe",
-                "D) Aurelion Sol"
+            "respuestas": [
+                "Bard",
+                "LeBlanc",
+                "Zoe",
+                "Aurelion Sol"
             ],
-            "respuesta_correcta": "A) Bard"
+            "respuestaCorrecta": "Bard"
         },
         {
             "pregunta": "Quina posició sol jugar un personatge com Braum?",
-            "opciones": [
-                "A) Suport",
-                "B) Assassin",
-                "C) Mago",
-                "D) Tanque"
+            "respuestas": [
+                "Suport",
+                "Assassin",
+                "Mago",
+                "Tanque"
             ],
-            "respuesta_correcta": "A) Suport"
+            "respuestaCorrecta": "Suport"
         },
         {
             "pregunta": "Quina posició sol jugar un personatge com Darius?",
-            "opciones": [
-                "A) Suport",
-                "B) Assassin",
-                "C) Mago",
-                "D) Tanque"
+            "respuestas": [
+                "Suport",
+                "Assassin",
+                "Mago",
+                "Tanque"
             ],
-            "respuesta_correcta": "D) Tanque"
+            "respuestaCorrecta": "Tanque"
         },
         {
             "pregunta": "Quin personatge té la capacitat de convertir-se en una serp?",
-            "opciones": [
-                "A) Cassiopeia",
-                "B) Malzahar",
-                "C) Cho'Gath",
-                "D) Karthus"
+            "respuestas": [
+                "Cassiopeia",
+                "Malzahar",
+                "Cho'Gath",
+                "Karthus"
             ],
-            "respuesta_correcta": "A) Cassiopeia"
+            "respuestaCorrecta": "Cassiopeia"
         },
         {
             "pregunta": "Quina posició és la més comuna per a un personatge com Teemo?",
-            "opciones": [
-                "A) Top",
-                "B) Jungla",
-                "C) Mitjana",
-                "D) Suport"
+            "respuestas": [
+                "Top",
+                "Jungla",
+                "Mitjana",
+                "Suport"
             ],
-            "respuesta_correcta": "A) Top"
+            "respuestaCorrecta": "Top"
         },
         {
             "pregunta": "Quin personatge pot teletransportar-se a través del mapa de League of Legends?",
-            "opciones": [
-                "A) Kassadin",
-                "B) Twisted Fate",
-                "C) Ekko",
-                "D) Syndra"
+            "respuestas": [
+                "Kassadin",
+                "Twisted Fate",
+                "Ekko",
+                "Syndra"
             ],
-            "respuesta_correcta": "B) Twisted Fate"
+            "respuestaCorrecta": "Twisted Fate"
         },
         {
             "pregunta": "Quina posició sol jugar un personatge com Thresh?",
-            "opciones": [
-                "A) Suport",
-                "B) Assassin",
-                "C) Mago",
-                "D) Tanque"
+            "respuestas": [
+                "Suport",
+                "Assassin",
+                "Mago",
+                "Tanque"
             ],
-            "respuesta_correcta": "A) Suport"
+            "respuestaCorrecta": "Suport"
         },
         {
             "pregunta": "Quin personatge té la capacitat de robar vida als seus enemics?",
-            "opciones": [
-                "A) Swain",
-                "B) Azir",
-                "C) Zed",
-                "D) Yasuo"
+            "respuestas": [
+                "Swain",
+                "Azir",
+                "Zed",
+                "Yasuo"
             ],
-            "respuesta_correcta": "A) Swain"
+            "respuestaCorrecta": "Swain"
         },
         {
             "pregunta": "Quina posició sol jugar un personatge com Yasuo?",
-            "opciones": [
-                "A) Top o Mitjana",
-                "B) Jungla",
-                "C) Suport",
-                "D) Tanque"
+            "respuestas": [
+                "Top o Mitjana",
+                "Jungla",
+                "Suport",
+                "Tanque"
             ],
-            "respuesta_correcta": "A) Top o Mitjana"
+            "respuestaCorrecta": "Top o Mitjana"
         },
         {
             "pregunta": "Quin personatge pot canviar de forma en funció dels seus atacs?",
-            "opciones": [
-                "A) Nidalee",
-                "B) Riven",
-                "C) Warwick",
-                "D) Garen"
+            "respuestas": [
+                "Nidalee",
+                "Riven",
+                "Warwick",
+                "Garen"
             ],
-            "respuesta_correcta": "A) Nidalee"
+            "respuestaCorrecta": "Nidalee"
         }
     ]
 }

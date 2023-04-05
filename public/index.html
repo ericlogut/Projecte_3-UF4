@@ -103,6 +103,10 @@
 
         <div id="pregunta"></div>
         <div id="respuestas" class="contenedor-botones"></div>
+        <div id="waiting">
+          <p id="LoadingText">Esperando al resto de jugadores...</p>
+          <button id="botonEmpezarPartida">Empezar partida</button>
+        </div>
         <div id="cronometro">10</div>
         <div id="puntuacion"></div>
       </div>
@@ -116,16 +120,38 @@
       const socket = io();
       document.getElementById("pregunta").style.display = "none";
       document.getElementById("respuestas").style.display = "none";
+      document.getElementById("LoadingText").style.display = "none";
+      document.getElementById("botonEmpezarPartida").style.display = "none";
 
       function unirseAlJuego() {
         const nombre = document.getElementById("nombre").value;
         if (nombre) {
-          document.getElementById("formularioRegistro").style.display = "none";
-          document.getElementById("pregunta").style.display = "block";
-          document.getElementById("respuestas").style.display = "block";
-          socket.emit("nuevoJugador", nombre);
+          if (nombre != "admin") {
+            document.getElementById("LoadingText").style.display = "block";
+            document.getElementById("formularioRegistro").style.display = "none";
+            socket.emit("nuevoJugador",nombre)
+          } else {
+            document.getElementById("formularioRegistro").style.display = "none";
+            document.getElementById("botonEmpezarPartida").style.display = "block";
+          }
         }
       }
+      
+      function mostrarPreguntas () {
+          document.getElementById("pregunta").style.display = "block";
+          document.getElementById("respuestas").style.display = "block";
+          document.getElementById("waiting").style.display = "none";
+      }
+
+      var botonEmpezarPartida = document.getElementById("botonEmpezarPartida")
+      botonEmpezarPartida.addEventListener("click", () => {
+        socket.emit("start")
+      });
+
+      socket.on("mostrarPreguntaYRespuestas", () => {
+        console.log("hola")
+        mostrarPreguntas();
+      })   
 
       // Manejador de eventos para cuando se recibe una nueva pregunta
       socket.on("nuevaPregunta", (pregunta) => {
@@ -179,7 +205,7 @@
           historialUsuariosEl.appendChild(usuarioEl);
         });
       });
-
+ 
     </script>
   </body>
 </html>
