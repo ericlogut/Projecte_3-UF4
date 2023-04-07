@@ -48,6 +48,11 @@ var DURACION_TEMPORIZADOR = 10000; // 10 segundos en milisegundos
 
 let temporizador;
 
+// El temporizador no es individual, hace que todas las preguntas se pasen a la vez !!!
+// !!!
+// !!!
+// !!!
+// !!!
 function obtenerPreguntaActual() {
   pregunta = preguntas[preguntaActualIndex];
   preguntaActualIndex = (preguntaActualIndex + 1) % preguntas.length;
@@ -143,7 +148,7 @@ socket.on("enviarRespuesta", (respuesta) => {
       
       // Limpiamos el temporizador después de un minuto
       clearInterval(timer);
-    }, 10000);
+    }, 60000);
 
   });
 
