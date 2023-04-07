@@ -143,6 +143,11 @@
           document.getElementById("waiting").style.display = "none";
       }
 
+      function noMostrarPreguntas () {
+          document.getElementById("pregunta").style.display = "none";
+          document.getElementById("respuestas").style.display = "none";
+      }
+
       var botonEmpezarPartida = document.getElementById("botonEmpezarPartida")
       botonEmpezarPartida.addEventListener("click", () => {
         socket.emit("start")
@@ -153,6 +158,11 @@
         mostrarPreguntas();
       })   
 
+      socket.on('timerEnded', () => {
+        console.log('Temporizador ha terminado!');
+        noMostrarPreguntas();
+
+      });
       // Manejador de eventos para cuando se recibe una nueva pregunta
       socket.on("nuevaPregunta", (pregunta) => {
         const preguntaEl = document.getElementById("pregunta");

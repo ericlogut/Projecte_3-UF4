@@ -111,6 +111,17 @@ socket.on("enviarRespuesta", (respuesta) => {
     let preguntaParaUsar = obtenerPreguntaActual();
     io.emit("nuevaPregunta", preguntaParaUsar);
     io.emit('mostrarPreguntaYRespuestas');
+
+    const timer = setInterval(() => {
+      console.log('Temporizador iniciado!');
+      
+      // Enviamos la señal al  cliente cuando el temporizador ha terminado
+      io.emit('timerEnded');
+      
+      // Limpiamos el temporizador después de un minuto
+      clearInterval(timer);
+    }, 60000);
+
   });
 
     // Manejador de eventos para cuando un jugador se desconecta
