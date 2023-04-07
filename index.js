@@ -18,6 +18,8 @@ app.get("/", (req, res) => {
 const preguntasJSON = require('../Projecte_3-UF4/preguntas.json');
 var preguntas = preguntasJSON.Preguntas
 
+var nombres = [];
+
 // Array de preguntas para el juego
 let preguntas2 = [ 
   {
@@ -44,18 +46,28 @@ var pregunta = {};
 var DURACION_TEMPORIZADOR = 10000; // 10 segundos en milisegundos
 
 
-// Función para obtener una pregunta aleatoria del array de preguntas
+let temporizador;
+
 function obtenerPreguntaActual() {
   pregunta = preguntas[preguntaActualIndex];
   preguntaActualIndex = (preguntaActualIndex + 1) % preguntas.length;
-   // Iniciar el temporizador
-   setTimeout(() => {
+
+  // Cancelar el temporizador actual si existe
+  if (temporizador) {
+    clearTimeout(temporizador);
+  }
+
+  // Iniciar el temporizador
+  temporizador = setTimeout(() => {
     // Si el temporizador termina, obtener la siguiente pregunta y enviarla al jugador
     const siguientePregunta = obtenerPreguntaActual();
     io.emit("nuevaPregunta", siguientePregunta);
   }, DURACION_TEMPORIZADOR);
+
   return pregunta;
 }
+
+
 
 
 
@@ -80,6 +92,17 @@ socket.on("nuevoJugador", (nombre) => {
   const historialUsuarios = Object.values(jugadores).map((jugador) => jugador.nombre);
   io.emit("actualizarHistorialUsuarios", historialUsuarios);
 });  
+
+
+socket.on("comprovarNombre", (nombre) => {
+  if (nombres.includes(nombre)) {
+    io.emit("nombreRepetido", true)
+  } else {
+    nombres.push(nombre);
+    io.emit("nombreRepetido", false)
+  }
+});
+
 
 // Manejador de eventos para cuando un jugador envía una respuesta
 socket.on("enviarRespuesta", (respuesta) => {
@@ -116,11 +139,11 @@ socket.on("enviarRespuesta", (respuesta) => {
       console.log('Temporizador iniciado!');
       
       // Enviamos la señal al  cliente cuando el temporizador ha terminado
-      io.emit('timerEnded');
+      io.emit('timerEnded', jugadores);
       
       // Limpiamos el temporizador después de un minuto
       clearInterval(timer);
-    }, 60000);
+    }, 10000);
 
   });
 

@@ -2,8 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
-    <title>Juego de preguntas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">    <title>Juego de preguntas</title>
     <style>
 
     @import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
@@ -108,6 +107,7 @@
           <button id="botonEmpezarPartida">Empezar partida</button>
         </div>
         <div id="cronometro">10</div>
+        <div id="ranking"></div>
         <div id="puntuacion"></div>
       </div>
       <div id="historialUsuarios">
@@ -125,16 +125,24 @@
 
       function unirseAlJuego() {
         const nombre = document.getElementById("nombre").value;
-        if (nombre) {
-          if (nombre != "admin") {
-            document.getElementById("LoadingText").style.display = "block";
-            document.getElementById("formularioRegistro").style.display = "none";
-            socket.emit("nuevoJugador",nombre)
+        socket.emit("comprovarNombre",nombre)
+        socket.on("nombreRepetido", async (data) => {
+          console.log(data)
+          if (!data) {
+            if (nombre != "admin") {
+              document.getElementById("LoadingText").style.display = "block";
+              document.getElementById("formularioRegistro").style.display = "none";
+              document.getElementById("botonEmpezarPartida").style.display = "none";
+              socket.emit("nuevoJugador",nombre)
+            } else {
+              document.getElementById("formularioRegistro").style.display = "none";
+              document.getElementById("botonEmpezarPartida").style.display = "block";
+              socket.emit("nuevoJugador","admin")
+            }
           } else {
-            document.getElementById("formularioRegistro").style.display = "none";
-            document.getElementById("botonEmpezarPartida").style.display = "block";
+            console.log("Nombre repetido")
           }
-        }
+        })
       }
       
       function mostrarPreguntas () {
@@ -158,11 +166,6 @@
         mostrarPreguntas();
       })   
 
-      socket.on('timerEnded', () => {
-        console.log('Temporizador ha terminado!');
-        noMostrarPreguntas();
-
-      });
       // Manejador de eventos para cuando se recibe una nueva pregunta
       socket.on("nuevaPregunta", (pregunta) => {
         const preguntaEl = document.getElementById("pregunta");
@@ -204,6 +207,68 @@
         });
       });
 
+      socket.on('timerEnded', (jugadores) => {
+        document.getElementById("puntuacion").style.display = "none";
+        noMostrarPreguntas();
+        var top3 = obtenerTresMejoresJugadores(jugadores);
+
+// Selecciona el elemento HTML donde se va a insertar la tabla
+const tablaContainer = document.getElementById("ranking");
+
+// Crea la tabla
+const tabla = document.createElement("table");
+tabla.classList.add("table"); // Agrega la clase "table" de Bootstrap a la tabla
+
+// Crea la fila de encabezado de la tabla
+const encabezado = document.createElement("tr");
+const nombreEncabezado = document.createElement("th");
+nombreEncabezado.textContent = "Nombre";
+nombreEncabezado.classList.add("text-center"); // Agrega la clase "text-center" de Bootstrap al encabezado del nombre
+const puntosEncabezado = document.createElement("th");
+puntosEncabezado.textContent = "Puntos";
+puntosEncabezado.classList.add("text-center"); // Agrega la clase "text-center" de Bootstrap al encabezado de los puntos
+encabezado.appendChild(nombreEncabezado);
+encabezado.appendChild(puntosEncabezado);
+tabla.appendChild(encabezado);
+
+// Crea las filas de la tabla
+for (let jugador of top3) {
+  const fila = document.createElement("tr");
+  const nombreCelda = document.createElement("td");
+  nombreCelda.textContent = jugador.nombre;
+  const puntosCelda = document.createElement("td");
+  puntosCelda.textContent = jugador.puntos;
+  nombreCelda.classList.add("text-center");
+  puntosCelda.classList.add("text-center");
+  fila.appendChild(nombreCelda);
+  fila.appendChild(puntosCelda);
+  tabla.appendChild(fila);
+  fila.classList.add("table-light"); // Agrega la clase "table-light" de Bootstrap a cada fila de la tabla
+}
+
+// Inserta la tabla en el elemento HTML
+tablaContainer.appendChild(tabla);
+
+
+        
+        function obtenerTresMejoresJugadores(jugadores) {
+          // Convertir el objeto de jugadores en un array de jugadores
+          const arrayJugadores = Object.values(jugadores);
+
+          // Ordenar el array de jugadores por puntos de mayor a menor
+          arrayJugadores.sort((a, b) => b.puntos - a.puntos);
+
+          // Obtener los tres primeros jugadores del array y extraer sus nombres y puntos
+          const tresMejoresJugadores = arrayJugadores.slice(0, 3).map(jugador => ({
+            nombre: jugador.nombre,
+            puntos: jugador.puntos
+          }));
+
+          // Devolver el array con los nombres y puntos de los tres primeros jugadores
+          return tresMejoresJugadores;
+        }
+      });
+
       // Manejador de eventos para actualizar el historial de usuarios
       socket.on("actualizarHistorialUsuarios", (historialUsuarios) => {
         const historialUsuariosEl = document.getElementById("historialUsuarios");
@@ -215,7 +280,6 @@
           historialUsuariosEl.appendChild(usuarioEl);
         });
       });
- 
     </script>
   </body>
 </html>
