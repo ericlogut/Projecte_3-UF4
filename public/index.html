@@ -81,11 +81,6 @@
       vertical-align: middle; /* Alinear verticalmente los elementos */
       margin-right: 10px; /* Añadir un margen derecho para separar los elementos */
     }
-
-
-
-
-
     </style>
   </head>
   <body>
@@ -111,7 +106,7 @@
 
         <div id="waiting">
           <p style="display: none;" id="LoadingText">Esperando al resto de jugadores...</p>
-          <button style="display: none;" id="botonEmpezarPartida">Empezar partida</button>
+          <button style="display: none;" id="botonEmpezarPartida" onclick="botonEmpezarPartida()">Empezar partida</button>
         </div>
         <div id="ranking"></div>
         <div id="puntuacion"></div>
@@ -169,10 +164,25 @@
           document.getElementById("respuestas").style.display = "none";
       }
 
-      var botonEmpezarPartida = document.getElementById("botonEmpezarPartida")
-      botonEmpezarPartida.addEventListener("click", () => {
-        socket.emit("start")
-      });
+      function botonEmpezarPartida(){
+         // Eliminar el temporizador previo si existe
+         clearInterval(temporizadorCuentaRegresiva);
+
+          // Establecer el valor del temporizador
+          tiempoRestanteCuentaRegresiva = DURACION_CUENTA / 1000; // Utilizar la variable global tiempoRestante
+          document.getElementById("cuenta").innerText = tiempoRestanteCuentaRegresiva;
+
+          // Actualizar el valor del cronómetro y el tiempo restante cada segundo
+          temporizadorCuentaRegresiva = setInterval(() => {
+          tiempoRestanteCuentaRegresiva--;
+          actualizarCuentaRegresiva();
+          }, 1000);
+
+            setTimeout(() => {
+              detenerPartida();
+            }, 60000); // 60000 milisegundos = 1 minuto
+
+      }
 
 
       // Función para actualizar el cronómetro
