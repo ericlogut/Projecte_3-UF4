@@ -44,7 +44,9 @@
     <div id="puntuacion"></div>
     <div style="display: none;" id="cronometro">10</div>
     <div id="tiempo-restante"></div>
-    <div id="tiempo-transcurrido"></div>
+
+    <div style="display: none;" id="cuenta">60</div>
+    <div id="cuenta-regresiva"></div>
     
     <div id="historialUsuarios">
       <h2>Historial de jugadores</h2>
@@ -53,21 +55,13 @@
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
-      let fechaRegistro = new Date();
       const socket = io();
       const DURACION_TEMPORIZADOR = 10000; // Duración del temporizador en milisegundos
       let tiempoRestante = DURACION_TEMPORIZADOR / 1000; // Dividir por 1000 para convertir de milisegundos a segundos
+      let tiempoRestanteCuentaRegresiva = DURACION_TEMPORIZADOR / 1000; // Dividir por 1000 para convertir de milisegundos a segundos
        let temporizador; // Variable para el temporizador
+       let temporizadorCuentaRegresiva; // Variable para el temporizador
        let usuarioRegistrado = false; // Variable para verificar si el usuario se ha registrado
-       const tiempoLimite = 10;
-
-       function actualizarTiempoTranscurrido() {
-      const tiempoTranscurridoEl = document.getElementById("tiempo-transcurrido");
-      const tiempoTranscurrido = Math.floor((new Date() - fechaRegistro) / 1000); // Obtener tiempo transcurrido en segundos
-      tiempoTranscurridoEl.innerText = `Tiempo transcurrido: ${tiempoTranscurrido} segundos`;
-}
-
-
 
       function unirseAlJuego() {
         const nombre = document.getElementById("nombre").value;
@@ -77,35 +71,61 @@
           document.getElementById("respuestas").style.display = "block";
           socket.emit("nuevoJugador", nombre);
           usuarioRegistrado = true; // Establecer la variable en true cuando el usuario se registra
-          fechaRegistro = new Date();
 
-          // Agregar temporizador para terminar la partida después de un minuto
+          // Eliminar el temporizador previo si existe
+          clearInterval(temporizadorCuentaRegresiva);
+
+        // Establecer el valor del temporizador
+        tiempoRestanteCuentaRegresiva = DURACION_TEMPORIZADOR / 1000; // Utilizar la variable global tiempoRestante
+        document.getElementById("cuenta").innerText = tiempoRestanteCuentaRegresiva;
+
+        // Actualizar el valor del cronómetro y el tiempo restante cada segundo
+        temporizadorCuentaRegresiva = setInterval(() => {
+          tiempoRestanteCuentaRegresiva--;
+          actualizarCuentaRegresiva();
+        }, 1000);
+
           setTimeout(() => {
             detenerPartida();
           }, 60000); // 60000 milisegundos = 1 minuto
-
-          // Iniciar intervalo para actualizar el tiempo transcurrido
-    intervaloTiempoTranscurrido = setInterval(() => {
-      tiempoTranscurrido = Math.floor((new Date() - fechaRegistro) / 1000);
-      actualizarTiempoTranscurrido();
-    }, 1000);
       }
   }
-  function detenerTemporizador() {
-  clearInterval(intervaloTiempoTranscurrido);
-}
+
   function detenerPartida() {
   // Detener el temporizador actual
   clearInterval(temporizador);
-  detenerTemporizador();
+  clearInterval(temporizadorCuentaRegresiva);
   socket.emit("detenerPartida");
 
   // Emitir evento para indicar que se debe detener la partida
 }
 
-function actualizarTiempoTranscurrido() {
-  const tiempoTranscurridoEl = document.getElementById("tiempo-transcurrido");
-  tiempoTranscurridoEl.innerText = `Tiempo transcurrido: ${tiempoTranscurrido} segundos`;
+// Función para actualizar el cronómetro
+function actualizarCuentaRegresiva() {
+  // Obtener los elementos del cronómetro y el tiempo restante
+  const cuentaEl= document.getElementById("cuenta");
+  const cuentaRegresivaEl = document.getElementById("cuenta-regresiva");
+
+  // Si el usuario no se ha registrado, no iniciar el temporizador
+  if (!usuarioRegistrado) {
+    return;
+  }
+
+  // Obtener el valor actual del cronómetro
+  let tiempoActual = parseInt(cuentaEl.innerText);
+
+  // Si se agota el tiempo, detener el temporizador
+  if (tiempoActual <= 0) {
+    clearInterval(temporizadorCuentaRegresiva);
+    tiempoActual = 0;
+  } else {
+    // Reducir el tiempo restante
+    tiempoActual--;
+  }
+
+  // Actualizar el valor del cronómetro y el tiempo restante
+  cuentaEl.innerText = tiempoActual;
+  cuentaRegresivaEl.innerText = `Tiempo transcurrido: ${tiempoActual} segundos`;
 }
 
       // Función para actualizar el cronómetro
