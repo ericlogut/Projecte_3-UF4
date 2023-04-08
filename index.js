@@ -14,14 +14,11 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
 });
 
-// Preguntas del JSON
-const preguntasJSON = require('../Projecte_3-UF4/preguntas.json');
-var preguntas = preguntasJSON.Preguntas
 
 var nombres = [];
 
 // Array de preguntas para el juego
-let preguntas2 = [ 
+let preguntas = [ 
   {
     pregunta: "¿Cuál es la capital de España?",
     respuestas: ["Madrid", "Barcelona", "Sevilla", "Valencia"],
@@ -72,11 +69,6 @@ socket.on("nuevoJugador", (nombre) => {
   io.emit("actualizarHistorialUsuarios", historialUsuarios);
 });  
 
-// Enviar la pregunta inicial al jugador
-let pregunta = obtenerPreguntaActual();
-socket.emit("nuevaPregunta", pregunta);
-
-
 socket.on("comprovarNombre", (nombre) => {
   if (nombres.includes(nombre)) {
     io.emit("nombreRepetido", true)
@@ -108,13 +100,13 @@ socket.on("enviarRespuesta", (respuesta) => {
   io.emit("actualizarPuntuacion", jugadores);
 });
 
+socket.on('start', () => {
+  // Enviar la pregunta inicial al jugador
+  let preguntaParaUsar = obtenerPreguntaActual();
+  io.emit("nuevaPregunta", preguntaParaUsar);
 
-  socket.on('start', () => {
-// Enviar la pregunta inicial al jugador
-let pregunta = obtenerPreguntaActual();
-socket.emit("nuevaPregunta", pregunta);
 
-  });
+});
 
     // Manejador de eventos para cuando un jugador se desconecta
     socket.on("disconnect", () => {

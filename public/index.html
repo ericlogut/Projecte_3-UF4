@@ -100,16 +100,18 @@
           <button class="btn btn-primary" onclick="unirseAlJuego()">Unirse al juego</button>
         </div>
 
-        <div id="pregunta"></div>
-        <div id="respuestas" class="contenedor-botones"></div>
+        <div style="display: none;" id="pregunta"></div>
+        <div style="display: none;" id="respuestas" class="contenedor-botones"></div>
+
         <div style="display: none;" id="cronometro">10</div>
         <div id="tiempo-restante"></div>
 
         <div style="display: none;" id="cuenta">60</div>
         <div id="cuenta-regresiva"></div>
+
         <div id="waiting">
-          <p id="LoadingText">Esperando al resto de jugadores...</p>
-          <button id="botonEmpezarPartida">Empezar partida</button>
+          <p style="display: none;" id="LoadingText">Esperando al resto de jugadores...</p>
+          <button style="display: none;" id="botonEmpezarPartida">Empezar partida</button>
         </div>
         <div id="ranking"></div>
         <div id="puntuacion"></div>
@@ -131,11 +133,6 @@
        let temporizador; // Variable para el temporizador
        let temporizadorCuentaRegresiva; // Variable para el temporizador
        let usuarioRegistrado = false; // Variable para verificar si el usuario se ha registrado
-
-      document.getElementById("pregunta").style.display = "none";
-      document.getElementById("respuestas").style.display = "none";
-      document.getElementById("LoadingText").style.display = "none";
-      document.getElementById("botonEmpezarPartida").style.display = "none";
 
       function unirseAlJuego() {
         const nombre = document.getElementById("nombre").value;
@@ -162,8 +159,8 @@
       function mostrarPreguntas () {
           document.getElementById("pregunta").style.display = "block";
           document.getElementById("respuestas").style.display = "block";
-          document.getElementById("cuenta-regresiva").style.display = "block";
-          document.getElementById("tiempo-restante").style.display = "block";
+          document.getElementById("cronometro").style.display = "block";
+          document.getElementById("cuenta").style.display = "block";
           document.getElementById("waiting").style.display = "none";
       }
 
@@ -175,83 +172,66 @@
       var botonEmpezarPartida = document.getElementById("botonEmpezarPartida")
       botonEmpezarPartida.addEventListener("click", () => {
         socket.emit("start")
+      });
 
-            // Eliminar el temporizador previo si existe
-            clearInterval(temporizadorCuentaRegresiva);
 
-            // Establecer el valor del temporizador
-            tiempoRestanteCuentaRegresiva = DURACION_CUENTA / 1000; // Utilizar la variable global tiempoRestante
-            document.getElementById("cuenta").innerText = tiempoRestanteCuentaRegresiva;
+      // Función para actualizar el cronómetro
+      function actualizarCuentaRegresiva() {
+        // Obtener los elementos del cronómetro y el tiempo restante
+        const cuentaEl= document.getElementById("cuenta");
+        const cuentaRegresivaEl = document.getElementById("cuenta-regresiva");
 
-            // Actualizar el valor del cronómetro y el tiempo restante cada segundo
-            temporizadorCuentaRegresiva = setInterval(() => {
-            tiempoRestanteCuentaRegresiva--;
-            actualizarCuentaRegresiva();
-            }, 1000);
+        // Si el usuario no se ha registrado, no iniciar el temporizador
+        if (!usuarioRegistrado) {
+          return;
+        }
 
-              setTimeout(() => {
-                detenerPartida();
-              }, 60000); // 60000 milisegundos = 1 minuto
+        // Obtener el valor actual del cronómetro
+        let tiempoActual = parseInt(cuentaEl.innerText);
 
-                  });
+        // Si se agota el tiempo, detener el temporizador
+        if (tiempoActual <= 0) {
+          clearInterval(temporizadorCuentaRegresiva);
+          tiempoActual = 0;
+        } else {
+          // Reducir el tiempo restante
+          tiempoActual--;
+        }
 
-                  // Función para actualizar el cronómetro
-function actualizarCuentaRegresiva() {
-  // Obtener los elementos del cronómetro y el tiempo restante
-  const cuentaEl= document.getElementById("cuenta");
-  const cuentaRegresivaEl = document.getElementById("cuenta-regresiva");
-
-  // Si el usuario no se ha registrado, no iniciar el temporizador
-  if (!usuarioRegistrado) {
-    return;
-  }
-
-  // Obtener el valor actual del cronómetro
-  let tiempoActual = parseInt(cuentaEl.innerText);
-
-  // Si se agota el tiempo, detener el temporizador
-  if (tiempoActual <= 0) {
-    clearInterval(temporizadorCuentaRegresiva);
-    tiempoActual = 0;
-  } else {
-    // Reducir el tiempo restante
-    tiempoActual--;
-  }
-
-  // Actualizar el valor del cronómetro y el tiempo restante
-  cuentaEl.innerText = tiempoActual;
-  cuentaRegresivaEl.innerText = `Tiempo restante partida: ${tiempoActual} segundos`;
-}
+        // Actualizar el valor del cronómetro y el tiempo restante
+        cuentaEl.innerText = tiempoActual;
+        cuentaRegresivaEl.innerText = `Tiempo restante partida: ${tiempoActual} segundos`;
+      }
 
       // Función para actualizar el cronómetro
       function actualizarCronometro() {
-  // Obtener los elementos del cronómetro y el tiempo restante
-  const cronometroEl = document.getElementById("cronometro");
-  const tiempoRestanteEl = document.getElementById("tiempo-restante");
+      // Obtener los elementos del cronómetro y el tiempo restante
+      const cronometroEl = document.getElementById("cronometro");
+      const tiempoRestanteEl = document.getElementById("tiempo-restante");
 
-  // Si el usuario no se ha registrado, no iniciar el temporizador
-  if (!usuarioRegistrado) {
-    return;
-  }
+      // Si el usuario no se ha registrado, no iniciar el temporizador
+      if (!usuarioRegistrado) {
+        return;
+      }
 
-  // Obtener el valor actual del cronómetro
-  let tiempoActual = parseInt(cronometroEl.innerText);
+      // Obtener el valor actual del cronómetro
+      let tiempoActual = parseInt(cronometroEl.innerText);
 
-  // Si se agota el tiempo, detener el temporizador
-  if (tiempoActual <= 0) {
-    clearInterval(temporizador);
-    tiempoActual = 0;
-    socket.emit("enviarRespuesta", "");
-    socket.emit("siguientePregunta");
-  } else {
-    // Reducir el tiempo restante
-    tiempoActual--;
-  }
+      // Si se agota el tiempo, detener el temporizador
+      if (tiempoActual <= 0) {
+        clearInterval(temporizador);
+        tiempoActual = 0;
+        socket.emit("enviarRespuesta", "");
+        socket.emit("siguientePregunta");
+      } else {
+        // Reducir el tiempo restante
+        tiempoActual--;
+      }
 
-  // Actualizar el valor del cronómetro y el tiempo restante
-  cronometroEl.innerText = tiempoActual;
-  tiempoRestanteEl.innerText = `Tiempo restante pregunta: ${tiempoActual} segundos`;
-} 
+      // Actualizar el valor del cronómetro y el tiempo restante
+      cronometroEl.innerText = tiempoActual;
+      tiempoRestanteEl.innerText = `Tiempo restante pregunta: ${tiempoActual} segundos`;
+    } 
 
       // Manejador de eventos para cuando se recibe una nueva pregunta
       socket.on("nuevaPregunta", (pregunta) => {
