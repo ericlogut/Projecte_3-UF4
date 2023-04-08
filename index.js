@@ -42,34 +42,13 @@ let preguntas2 = [
 // Objeto para guardar los jugadores conectados
 const jugadores = {};
 let preguntaActualIndex = 0;
-var pregunta = {};
-var DURACION_TEMPORIZADOR = 10000; // 10 segundos en milisegundos
 
-
-let temporizador;
-
+// Función para obtener una pregunta aleatoria del array de preguntas
 function obtenerPreguntaActual() {
-  pregunta = preguntas[preguntaActualIndex];
+  const pregunta = preguntas[preguntaActualIndex];
   preguntaActualIndex = (preguntaActualIndex + 1) % preguntas.length;
-
-  // Cancelar el temporizador actual si existe
-  if (temporizador) {
-    clearTimeout(temporizador);
-  }
-
-  // Iniciar el temporizador
-  temporizador = setTimeout(() => {
-    // Si el temporizador termina, obtener la siguiente pregunta y enviarla al jugador
-    const siguientePregunta = obtenerPreguntaActual();
-    io.emit("nuevaPregunta", siguientePregunta);
-  }, DURACION_TEMPORIZADOR);
-
   return pregunta;
 }
-
-
-
-
 
 // Función para comprobar si una respuesta es correcta
 function comprobarRespuesta(pregunta, respuesta) {
@@ -93,6 +72,10 @@ socket.on("nuevoJugador", (nombre) => {
   io.emit("actualizarHistorialUsuarios", historialUsuarios);
 });  
 
+// Enviar la pregunta inicial al jugador
+let pregunta = obtenerPreguntaActual();
+socket.emit("nuevaPregunta", pregunta);
+
 
 socket.on("comprovarNombre", (nombre) => {
   if (nombres.includes(nombre)) {
@@ -115,10 +98,7 @@ socket.on("enviarRespuesta", (respuesta) => {
     // Sumar un punto al jugador
     jugador.puntos++;
   } 
-
- // Cancelar el temporizador actual y obtener una nueva pregunta
-  //  clearTimeout(temporizador);
-  DURACION_TEMPORIZADOR = 10000;
+ // Obtener una nueva pregunta y actualizar la variable preguntaActual
   pregunta = obtenerPreguntaActual();
 
   // Enviar una nueva pregunta al jugador
@@ -130,20 +110,9 @@ socket.on("enviarRespuesta", (respuesta) => {
 
 
   socket.on('start', () => {
-    // Enviar la pregunta inicial al jugador
-    let preguntaParaUsar = obtenerPreguntaActual();
-    io.emit("nuevaPregunta", preguntaParaUsar);
-    io.emit('mostrarPreguntaYRespuestas');
-
-    const timer = setInterval(() => {
-      console.log('Temporizador iniciado!');
-      
-      // Enviamos la señal al  cliente cuando el temporizador ha terminado
-      io.emit('timerEnded', jugadores);
-      
-      // Limpiamos el temporizador después de un minuto
-      clearInterval(timer);
-    }, 10000);
+// Enviar la pregunta inicial al jugador
+let pregunta = obtenerPreguntaActual();
+socket.emit("nuevaPregunta", pregunta);
 
   });
 

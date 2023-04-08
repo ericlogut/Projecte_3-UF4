@@ -102,11 +102,15 @@
 
         <div id="pregunta"></div>
         <div id="respuestas" class="contenedor-botones"></div>
+        <div style="display: none;" id="cronometro">10</div>
+        <div id="tiempo-restante"></div>
+
+        <div style="display: none;" id="cuenta">60</div>
+        <div id="cuenta-regresiva"></div>
         <div id="waiting">
           <p id="LoadingText">Esperando al resto de jugadores...</p>
           <button id="botonEmpezarPartida">Empezar partida</button>
         </div>
-        <div id="cronometro">10</div>
         <div id="ranking"></div>
         <div id="puntuacion"></div>
       </div>
@@ -118,6 +122,16 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
       const socket = io();
+
+      //Variables para la aplicación
+      const DURACION_TEMPORIZADOR = 10000; // Duración del temporizador en milisegundos
+      const DURACION_CUENTA = 60000; // Duración del temporizador en milisegundos
+      let tiempoRestante = DURACION_TEMPORIZADOR / 1000; // Dividir por 1000 para convertir de milisegundos a segundos
+      let tiempoRestanteCuentaRegresiva = DURACION_CUENTA / 1000; // Dividir por 1000 para convertir de milisegundos a segundos
+       let temporizador; // Variable para el temporizador
+       let temporizadorCuentaRegresiva; // Variable para el temporizador
+       let usuarioRegistrado = false; // Variable para verificar si el usuario se ha registrado
+
       document.getElementById("pregunta").style.display = "none";
       document.getElementById("respuestas").style.display = "none";
       document.getElementById("LoadingText").style.display = "none";
@@ -148,6 +162,8 @@
       function mostrarPreguntas () {
           document.getElementById("pregunta").style.display = "block";
           document.getElementById("respuestas").style.display = "block";
+          document.getElementById("cuenta-regresiva").style.display = "block";
+          document.getElementById("tiempo-restante").style.display = "block";
           document.getElementById("waiting").style.display = "none";
       }
 
@@ -159,17 +175,101 @@
       var botonEmpezarPartida = document.getElementById("botonEmpezarPartida")
       botonEmpezarPartida.addEventListener("click", () => {
         socket.emit("start")
-      });
 
-      socket.on("mostrarPreguntaYRespuestas", () => {
-        console.log("hola")
-        mostrarPreguntas();
-      })   
+            // Eliminar el temporizador previo si existe
+            clearInterval(temporizadorCuentaRegresiva);
+
+            // Establecer el valor del temporizador
+            tiempoRestanteCuentaRegresiva = DURACION_CUENTA / 1000; // Utilizar la variable global tiempoRestante
+            document.getElementById("cuenta").innerText = tiempoRestanteCuentaRegresiva;
+
+            // Actualizar el valor del cronómetro y el tiempo restante cada segundo
+            temporizadorCuentaRegresiva = setInterval(() => {
+            tiempoRestanteCuentaRegresiva--;
+            actualizarCuentaRegresiva();
+            }, 1000);
+
+              setTimeout(() => {
+                detenerPartida();
+              }, 60000); // 60000 milisegundos = 1 minuto
+
+                  });
+
+                  // Función para actualizar el cronómetro
+function actualizarCuentaRegresiva() {
+  // Obtener los elementos del cronómetro y el tiempo restante
+  const cuentaEl= document.getElementById("cuenta");
+  const cuentaRegresivaEl = document.getElementById("cuenta-regresiva");
+
+  // Si el usuario no se ha registrado, no iniciar el temporizador
+  if (!usuarioRegistrado) {
+    return;
+  }
+
+  // Obtener el valor actual del cronómetro
+  let tiempoActual = parseInt(cuentaEl.innerText);
+
+  // Si se agota el tiempo, detener el temporizador
+  if (tiempoActual <= 0) {
+    clearInterval(temporizadorCuentaRegresiva);
+    tiempoActual = 0;
+  } else {
+    // Reducir el tiempo restante
+    tiempoActual--;
+  }
+
+  // Actualizar el valor del cronómetro y el tiempo restante
+  cuentaEl.innerText = tiempoActual;
+  cuentaRegresivaEl.innerText = `Tiempo restante partida: ${tiempoActual} segundos`;
+}
+
+      // Función para actualizar el cronómetro
+      function actualizarCronometro() {
+  // Obtener los elementos del cronómetro y el tiempo restante
+  const cronometroEl = document.getElementById("cronometro");
+  const tiempoRestanteEl = document.getElementById("tiempo-restante");
+
+  // Si el usuario no se ha registrado, no iniciar el temporizador
+  if (!usuarioRegistrado) {
+    return;
+  }
+
+  // Obtener el valor actual del cronómetro
+  let tiempoActual = parseInt(cronometroEl.innerText);
+
+  // Si se agota el tiempo, detener el temporizador
+  if (tiempoActual <= 0) {
+    clearInterval(temporizador);
+    tiempoActual = 0;
+    socket.emit("enviarRespuesta", "");
+    socket.emit("siguientePregunta");
+  } else {
+    // Reducir el tiempo restante
+    tiempoActual--;
+  }
+
+  // Actualizar el valor del cronómetro y el tiempo restante
+  cronometroEl.innerText = tiempoActual;
+  tiempoRestanteEl.innerText = `Tiempo restante pregunta: ${tiempoActual} segundos`;
+} 
 
       // Manejador de eventos para cuando se recibe una nueva pregunta
       socket.on("nuevaPregunta", (pregunta) => {
         const preguntaEl = document.getElementById("pregunta");
         const respuestasEl = document.getElementById("respuestas");
+
+          // Eliminar el temporizador previo si existe
+          clearInterval(temporizador);
+
+          // Establecer el valor del temporizador
+          tiempoRestante = DURACION_TEMPORIZADOR / 1000; // Utilizar la variable global tiempoRestante
+          document.getElementById("cronometro").innerText = tiempoRestante;
+
+          // Actualizar el valor del cronómetro y el tiempo restante cada segundo
+          temporizador = setInterval(() => {
+            tiempoRestante--;
+            actualizarCronometro();
+          }, 1000);
 
         // Mostrar la pregunta
         preguntaEl.innerText = pregunta.pregunta;
@@ -184,6 +284,13 @@
 
           opcionEl.addEventListener("click", () => {
             socket.emit("enviarRespuesta", respuesta);
+
+            // Detener el temporizador
+           clearInterval(temporizador);
+
+          // Restablecer el valor del cronómetro y del tiempo restante
+          document.getElementById("cronometro").innerText = DURACION_TEMPORIZADOR / 1000;
+          document.getElementById("tiempo-restante").innerText = "";
           });
           respuestasEl.appendChild(opcionEl);
           i++;
