@@ -57,8 +57,9 @@
     <script>
       const socket = io();
       const DURACION_TEMPORIZADOR = 10000; // Duración del temporizador en milisegundos
+      const DURACION_CUENTA = 60000; // Duración del temporizador en milisegundos
       let tiempoRestante = DURACION_TEMPORIZADOR / 1000; // Dividir por 1000 para convertir de milisegundos a segundos
-      let tiempoRestanteCuentaRegresiva = DURACION_TEMPORIZADOR / 1000; // Dividir por 1000 para convertir de milisegundos a segundos
+      let tiempoRestanteCuentaRegresiva = DURACION_CUENTA / 1000; // Dividir por 1000 para convertir de milisegundos a segundos
        let temporizador; // Variable para el temporizador
        let temporizadorCuentaRegresiva; // Variable para el temporizador
        let usuarioRegistrado = false; // Variable para verificar si el usuario se ha registrado
@@ -75,15 +76,15 @@
           // Eliminar el temporizador previo si existe
           clearInterval(temporizadorCuentaRegresiva);
 
-        // Establecer el valor del temporizador
-        tiempoRestanteCuentaRegresiva = DURACION_TEMPORIZADOR / 1000; // Utilizar la variable global tiempoRestante
-        document.getElementById("cuenta").innerText = tiempoRestanteCuentaRegresiva;
+       // Establecer el valor del temporizador
+    tiempoRestanteCuentaRegresiva = DURACION_CUENTA / 1000; // Utilizar la variable global tiempoRestante
+    document.getElementById("cuenta").innerText = tiempoRestanteCuentaRegresiva;
 
         // Actualizar el valor del cronómetro y el tiempo restante cada segundo
-        temporizadorCuentaRegresiva = setInterval(() => {
-          tiempoRestanteCuentaRegresiva--;
-          actualizarCuentaRegresiva();
-        }, 1000);
+    temporizadorCuentaRegresiva = setInterval(() => {
+      tiempoRestanteCuentaRegresiva--;
+      actualizarCuentaRegresiva();
+    }, 1000);
 
           setTimeout(() => {
             detenerPartida();
@@ -125,7 +126,7 @@ function actualizarCuentaRegresiva() {
 
   // Actualizar el valor del cronómetro y el tiempo restante
   cuentaEl.innerText = tiempoActual;
-  cuentaRegresivaEl.innerText = `Tiempo transcurrido: ${tiempoActual} segundos`;
+  cuentaRegresivaEl.innerText = `Tiempo restante partida: ${tiempoActual} segundos`;
 }
 
       // Función para actualizar el cronómetro
@@ -155,7 +156,7 @@ function actualizarCuentaRegresiva() {
 
   // Actualizar el valor del cronómetro y el tiempo restante
   cronometroEl.innerText = tiempoActual;
-  tiempoRestanteEl.innerText = `Tiempo restante: ${tiempoActual} segundos`;
+  tiempoRestanteEl.innerText = `Tiempo restante pregunta: ${tiempoActual} segundos`;
 }
 
       // Manejador de eventos para cuando se recibe una nueva pregunta
