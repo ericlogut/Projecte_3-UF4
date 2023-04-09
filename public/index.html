@@ -106,7 +106,7 @@
 
         <div id="waiting">
           <p style="display: none;" id="LoadingText">Esperando al resto de jugadores...</p>
-          <button style="display: none;" id="botonEmpezarPartida" onclick="botonEmpezarPartida()">Empezar partida</button>
+          <button style="display: none;" id="startButton">Empezar partida</button>
         </div>
         <div id="ranking"></div>
         <div id="puntuacion"></div>
@@ -125,9 +125,9 @@
       const DURACION_CUENTA = 60000; // Duración del temporizador en milisegundos
       let tiempoRestante = DURACION_TEMPORIZADOR / 1000; // Dividir por 1000 para convertir de milisegundos a segundos
       let tiempoRestanteCuentaRegresiva = DURACION_CUENTA / 1000; // Dividir por 1000 para convertir de milisegundos a segundos
-       let temporizador; // Variable para el temporizador
-       let temporizadorCuentaRegresiva; // Variable para el temporizador
-       let usuarioRegistrado = false; // Variable para verificar si el usuario se ha registrado
+      let temporizador; // Variable para el temporizador
+      let temporizadorCuentaRegresiva; // Variable para el temporizador
+      let usuarioRegistrado = false; // Variable para verificar si el usuario se ha registrado
 
       function unirseAlJuego() {
         const nombre = document.getElementById("nombre").value;
@@ -138,12 +138,14 @@
             if (nombre != "admin") {
               document.getElementById("LoadingText").style.display = "block";
               document.getElementById("formularioRegistro").style.display = "none";
-              document.getElementById("botonEmpezarPartida").style.display = "none";
+              document.getElementById("startButton").style.display = "none";
               socket.emit("nuevoJugador",nombre)
+              usuarioRegistrado = true;
             } else {
               document.getElementById("formularioRegistro").style.display = "none";
-              document.getElementById("botonEmpezarPartida").style.display = "block";
+              document.getElementById("startButton").style.display = "block";
               socket.emit("nuevoJugador","admin")
+              usuarioRegistrado = true;
             }
           } else {
             console.log("Nombre repetido")
@@ -154,8 +156,6 @@
       function mostrarPreguntas () {
           document.getElementById("pregunta").style.display = "block";
           document.getElementById("respuestas").style.display = "block";
-          document.getElementById("cronometro").style.display = "block";
-          document.getElementById("cuenta").style.display = "block";
           document.getElementById("waiting").style.display = "none";
       }
 
@@ -164,25 +164,35 @@
           document.getElementById("respuestas").style.display = "none";
       }
 
-      function botonEmpezarPartida(){
-         // Eliminar el temporizador previo si existe
-         clearInterval(temporizadorCuentaRegresiva);
+      function detenerPartida() {
+      // Detener el temporizador actual
+      clearInterval(temporizador);
+      clearInterval(temporizadorCuentaRegresiva);
+      socket.emit("detenerPartida");
 
-          // Establecer el valor del temporizador
-          tiempoRestanteCuentaRegresiva = DURACION_CUENTA / 1000; // Utilizar la variable global tiempoRestante
-          document.getElementById("cuenta").innerText = tiempoRestanteCuentaRegresiva;
+      // Emitir evento para indicar que se debe detener la partida
+    }
 
-          // Actualizar el valor del cronómetro y el tiempo restante cada segundo
-          temporizadorCuentaRegresiva = setInterval(() => {
-          tiempoRestanteCuentaRegresiva--;
-          actualizarCuentaRegresiva();
-          }, 1000);
+      startButton.addEventListener("click", () => {
+      socket.emit("start");
+      mostrarPreguntas();
+      // Eliminar el temporizador previo si existe
+      clearInterval(temporizadorCuentaRegresiva);
 
-            setTimeout(() => {
-              detenerPartida();
-            }, 60000); // 60000 milisegundos = 1 minuto
+        // Establecer el valor del temporizador
+        tiempoRestanteCuentaRegresiva = DURACION_CUENTA / 1000; // Utilizar la variable global tiempoRestante
+        document.getElementById("cuenta").innerText = tiempoRestanteCuentaRegresiva;
 
-      }
+        // Actualizar el valor del cronómetro y el tiempo restante cada segundo
+        temporizadorCuentaRegresiva = setInterval(() => {
+        tiempoRestanteCuentaRegresiva--;
+        actualizarCuentaRegresiva();
+        }, 1000);
+
+          setTimeout(() => {
+            detenerPartida();
+          }, 60000); // 60000 milisegundos = 1 minuto
+      });
 
 
       // Función para actualizar el cronómetro
@@ -309,42 +319,42 @@
         noMostrarPreguntas();
         var top3 = obtenerTresMejoresJugadores(jugadores);
 
-// Selecciona el elemento HTML donde se va a insertar la tabla
-const tablaContainer = document.getElementById("ranking");
+      // Selecciona el elemento HTML donde se va a insertar la tabla
+      const tablaContainer = document.getElementById("ranking");
 
-// Crea la tabla
-const tabla = document.createElement("table");
-tabla.classList.add("table"); // Agrega la clase "table" de Bootstrap a la tabla
+      // Crea la tabla
+      const tabla = document.createElement("table");
+      tabla.classList.add("table"); // Agrega la clase "table" de Bootstrap a la tabla
 
-// Crea la fila de encabezado de la tabla
-const encabezado = document.createElement("tr");
-const nombreEncabezado = document.createElement("th");
-nombreEncabezado.textContent = "Nombre";
-nombreEncabezado.classList.add("text-center"); // Agrega la clase "text-center" de Bootstrap al encabezado del nombre
-const puntosEncabezado = document.createElement("th");
-puntosEncabezado.textContent = "Puntos";
-puntosEncabezado.classList.add("text-center"); // Agrega la clase "text-center" de Bootstrap al encabezado de los puntos
-encabezado.appendChild(nombreEncabezado);
-encabezado.appendChild(puntosEncabezado);
-tabla.appendChild(encabezado);
+      // Crea la fila de encabezado de la tabla
+      const encabezado = document.createElement("tr");
+      const nombreEncabezado = document.createElement("th");
+      nombreEncabezado.textContent = "Nombre";
+      nombreEncabezado.classList.add("text-center"); // Agrega la clase "text-center" de Bootstrap al encabezado del nombre
+      const puntosEncabezado = document.createElement("th");
+      puntosEncabezado.textContent = "Puntos";
+      puntosEncabezado.classList.add("text-center"); // Agrega la clase "text-center" de Bootstrap al encabezado de los puntos
+      encabezado.appendChild(nombreEncabezado);
+      encabezado.appendChild(puntosEncabezado);
+      tabla.appendChild(encabezado);
 
-// Crea las filas de la tabla
-for (let jugador of top3) {
-  const fila = document.createElement("tr");
-  const nombreCelda = document.createElement("td");
-  nombreCelda.textContent = jugador.nombre;
-  const puntosCelda = document.createElement("td");
-  puntosCelda.textContent = jugador.puntos;
-  nombreCelda.classList.add("text-center");
-  puntosCelda.classList.add("text-center");
-  fila.appendChild(nombreCelda);
-  fila.appendChild(puntosCelda);
-  tabla.appendChild(fila);
-  fila.classList.add("table-light"); // Agrega la clase "table-light" de Bootstrap a cada fila de la tabla
-}
+      // Crea las filas de la tabla
+      for (let jugador of top3) {
+        const fila = document.createElement("tr");
+        const nombreCelda = document.createElement("td");
+        nombreCelda.textContent = jugador.nombre;
+        const puntosCelda = document.createElement("td");
+        puntosCelda.textContent = jugador.puntos;
+        nombreCelda.classList.add("text-center");
+        puntosCelda.classList.add("text-center");
+        fila.appendChild(nombreCelda);
+        fila.appendChild(puntosCelda);
+        tabla.appendChild(fila);
+        fila.classList.add("table-light"); // Agrega la clase "table-light" de Bootstrap a cada fila de la tabla
+      }
 
-// Inserta la tabla en el elemento HTML
-tablaContainer.appendChild(tabla);
+      // Inserta la tabla en el elemento HTML
+      tablaContainer.appendChild(tabla);
 
 
         

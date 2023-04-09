@@ -78,6 +78,15 @@ socket.on("comprovarNombre", (nombre) => {
   }
 });
 
+socket.on('start', () => {
+  // Obtener una nueva pregunta aleatoria
+  let pregunta = obtenerPreguntaActual();
+
+  // Enviar la pregunta a todos los clientes
+  socket.emit("nuevaPregunta", pregunta);
+});
+
+
 
 // Manejador de eventos para cuando un jugador envía una respuesta
 socket.on("enviarRespuesta", (respuesta) => {
@@ -102,9 +111,8 @@ socket.on("enviarRespuesta", (respuesta) => {
 
 socket.on('start', () => {
   // Enviar la pregunta inicial al jugador
-  let preguntaParaUsar = obtenerPreguntaActual();
-  io.emit("nuevaPregunta", preguntaParaUsar);
-
+  pregunta = obtenerPreguntaActual();
+  io.emit("nuevaPregunta", pregunta);
 
 });
 
