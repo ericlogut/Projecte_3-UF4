@@ -80,7 +80,7 @@ socket.on("comprovarNombre", (nombre) => {
 
 socket.on('start', () => {
   // Obtener una nueva pregunta aleatoria
-  let pregunta = obtenerPreguntaActual();
+   pregunta = obtenerPreguntaActual();
 
   // Enviar la pregunta a todos los clientes
   socket.emit("nuevaPregunta", pregunta);
