@@ -99,10 +99,10 @@
         <div style="display: none;" id="respuestas" class="contenedor-botones"></div>
 
         <div style="display: none;" id="cronometro">10</div>
-        <div id="tiempo-restante"></div>
+        <div style="display: none;" id="tiempo-restante"></div>
 
         <div style="display: none;" id="cuenta">60</div>
-        <div id="cuenta-regresiva"></div>
+        <div style="display: none;" id="cuenta-regresiva"></div>
 
         <div id="waiting">
           <p style="display: none;" id="LoadingText">Esperando al resto de jugadores...</p>
@@ -154,8 +154,11 @@
       }
       
       function mostrarPreguntas () {
+         socket.emit("mostrarPreguntas");
           document.getElementById("pregunta").style.display = "block";
           document.getElementById("respuestas").style.display = "block";
+          document.getElementById("cuenta-regresiva").style.display = "block";
+          document.getElementById("tiempo-restante").style.display = "block";
           document.getElementById("waiting").style.display = "none";
       }
 

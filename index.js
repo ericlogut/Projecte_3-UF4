@@ -86,12 +86,15 @@ socket.on('start', () => {
   socket.emit("nuevaPregunta", pregunta);
 });
 
+socket.on("mostrarPreguntas", () => {
+  io.emit("preguntasYRespuestas", preguntasYRespuestas);
+});
+
 
 
 // Manejador de eventos para cuando un jugador envía una respuesta
 socket.on("enviarRespuesta", (respuesta) => {
   const jugador = jugadores[socket.id];
-  console.log(pregunta)
   // Comprobar si la respuesta es correcta
   const esCorrecta = comprobarRespuesta(pregunta, respuesta);
 
@@ -100,20 +103,13 @@ socket.on("enviarRespuesta", (respuesta) => {
     jugador.puntos++;
   } 
  // Obtener una nueva pregunta y actualizar la variable preguntaActual
-  pregunta = obtenerPreguntaActual();
+  let pregunta = obtenerPreguntaActual();
 
   // Enviar una nueva pregunta al jugador
   io.emit("nuevaPregunta", pregunta);
 
   // Emitir un evento a todos los jugadores para actualizar la puntuación
   io.emit("actualizarPuntuacion", jugadores);
-});
-
-socket.on('start', () => {
-  // Enviar la pregunta inicial al jugador
-  pregunta = obtenerPreguntaActual();
-  io.emit("nuevaPregunta", pregunta);
-
 });
 
     // Manejador de eventos para cuando un jugador se desconecta
