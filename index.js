@@ -105,6 +105,16 @@ socket.on('start', () => {
   io.emit("nuevaPregunta", preguntaParaUsar);
   io.emit('mostrarPreguntaYRespuestas');
 
+  const timer = setInterval(() => {
+    console.log('Temporizador iniciado!');
+    
+    // Enviamos la señal al  cliente cuando el temporizador ha terminado
+    io.emit('timerEnded', jugadores);
+    
+    // Limpiamos el temporizador después de un minuto
+    clearInterval(timer);
+  }, 60000);
+
 });
 
 
