@@ -96,7 +96,7 @@ socket.on("enviarRespuesta", (respuesta) => {
   socket.emit("nuevaPregunta", pregunta);
 
   // Emitir un evento a todos los jugadores para actualizar la puntuación
-  socket.emit("actualizarPuntuacion", jugadores);
+  io.emit("actualizarPuntuacion", jugadores);
 });
 
 socket.on('start', () => {
