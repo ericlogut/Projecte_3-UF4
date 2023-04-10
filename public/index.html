@@ -152,12 +152,31 @@
           }
         })
       }
+
+      function mostrarTiempoPartida(){
+      // Eliminar el temporizador previo si existe
+      clearInterval(temporizadorCuentaRegresiva);
+
+      // Establecer el valor del temporizador
+      tiempoRestanteCuentaRegresiva = DURACION_CUENTA / 1000; // Utilizar la variable global tiempoRestante
+      document.getElementById("cuenta").innerText = tiempoRestanteCuentaRegresiva;
+
+      // Actualizar el valor del cronómetro y el tiempo restante cada segundo
+      temporizadorCuentaRegresiva = setInterval(() => {
+      tiempoRestanteCuentaRegresiva--;
+      actualizarCuentaRegresiva();
+      }, 1000);
+
+        setTimeout(() => {
+          detenerPartida();
+        }, 60000); // 60000 milisegundos = 1 minuto
+      }
       
       function mostrarPreguntas () {
           document.getElementById("pregunta").style.display = "block";
           document.getElementById("respuestas").style.display = "block";
-          document.getElementById("cuenta-regresiva").style.display = "block";
           document.getElementById("tiempo-restante").style.display = "block";
+          document.getElementById("cuenta-regresiva").style.display = "block";
           document.getElementById("waiting").style.display = "none";
       }
 
@@ -179,27 +198,13 @@
 
       startButton.addEventListener("click", () => {
       socket.emit("start");
-      // Eliminar el temporizador previo si existe
-      clearInterval(temporizadorCuentaRegresiva);
-
-        // Establecer el valor del temporizador
-        tiempoRestanteCuentaRegresiva = DURACION_CUENTA / 1000; // Utilizar la variable global tiempoRestante
-        document.getElementById("cuenta").innerText = tiempoRestanteCuentaRegresiva;
-
-        // Actualizar el valor del cronómetro y el tiempo restante cada segundo
-        temporizadorCuentaRegresiva = setInterval(() => {
-        tiempoRestanteCuentaRegresiva--;
-        actualizarCuentaRegresiva();
-        }, 1000);
-
-          setTimeout(() => {
-            detenerPartida();
-          }, 60000); // 60000 milisegundos = 1 minuto
+      mostrarTiempoPartida()
       });
 
       socket.on("mostrarPreguntaYRespuestas", () => {
         console.log("hola")
         mostrarPreguntas();
+        mostrarTiempoPartida()
       })   
 
 
