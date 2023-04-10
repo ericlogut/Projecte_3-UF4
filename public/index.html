@@ -177,7 +177,6 @@
 
       startButton.addEventListener("click", () => {
       socket.emit("start");
-      mostrarPreguntas();
       // Eliminar el temporizador previo si existe
       clearInterval(temporizadorCuentaRegresiva);
 
@@ -195,6 +194,11 @@
             detenerPartida();
           }, 60000); // 60000 milisegundos = 1 minuto
       });
+
+      socket.on("mostrarPreguntaYRespuestas", () => {
+        console.log("hola")
+        mostrarPreguntas();
+      })   
 
 
       // Función para actualizar el cronómetro
