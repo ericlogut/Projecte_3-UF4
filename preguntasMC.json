@@ -1,0 +1,304 @@
+{
+    "Preguntas": [
+        {
+            "pregunta": "Com es diu la dimensió paral·lela a la del món principal a Minecraft?",
+            "respuestas": [
+                "El Fi",
+                "El Nether",
+                "El Aether",
+                "L'abisme"
+            ],
+            "respuestaCorrecta": "El Nether"
+        },
+        {
+            "pregunta": "Quin és l'objecte que es fa servir per crear un portal al Nether?",
+            "respuestas": [
+                "Obsidiana",
+                "Maons de Nether",
+                "Quarç del Nether",
+                "Ghast Tear"
+            ],
+            "respuestaCorrecta": "Obsidiana"
+        },
+        {
+            "pregunta": "Quin bloc és necessari per fer un golem de neu?",
+            "respuestas": [
+                "Neu",
+                "Gel",
+                "Arena",
+                "Pedra"
+            ],
+            "respuestaCorrecta": "Neu"
+        },
+        {
+            "pregunta": "Quin és el mineral més dur a Minecraft?",
+            "respuestas": [
+                "Diamant",
+                "Or",
+                "Herro",
+                "Redstone"
+            ],
+            "respuestaCorrecta": "Diamant"
+        },
+        {
+            "pregunta": "Quin objecte es necessita per encendre un portal a la fi?",
+            "respuestas": [
+                "Ull d'Ender",
+                "Diamant",
+                "Maons d'End",
+                "Perla d'Ender"
+            ],
+            "respuestaCorrecta": "Ull d'Ender"
+        },
+        {
+            "pregunta": "Quina és la criatura més perillosa a Minecraft?",
+            "respuestas": [
+                "Creeper",
+                "Zombie",
+                "Enderman",
+                "Esquelet"
+            ],
+            "respuestaCorrecta": "Creeper"
+        },
+        {
+            "pregunta": "Com es diu el cap final a Minecraft?",
+            "respuestas": [
+                "El Drac",
+                "El Ghast",
+                "El Wither",
+                "L'Esquelet"
+            ],
+            "respuestaCorrecta": "El Drac"
+        },
+        {
+            "pregunta": "Quina criatura del joc té l'habilitat d'explotar?",
+            "respuestas": [
+                "Creeper",
+                "Enderman",
+                "Zombie",
+                "Aranya"
+            ],
+            "respuestaCorrecta": "Creeper"
+        },
+        {
+            "pregunta": "Quin és lobjecte necessari per fer un arc a Minecraft?",
+            "respuestas": [
+                "Fil i pals",
+                "Fil i cuir",
+                "Llana i pals",
+                "Llana i cuir"
+            ],
+            "respuestaCorrecta": "Fil i pals"
+        },
+        {
+            "pregunta": "Quin objecte es necessita per fer un llit a Minecraft?",
+            "respuestas": [
+                "Llana i fusta",
+                "Llana i ferro",
+                "Llana i diamant",
+                "Llana i or"
+            ],
+            "respuestaCorrecta": "Llana i fusta"
+        },
+        {
+            "pregunta": "Quin bloc de Minecraft s'utilitza per a fer bàsics com torxes i eines?",
+            "respuestas": [
+                "Fusta",
+                "Pedra",
+                "Ferro",
+                "Diamant"
+            ],
+            "respuestaCorrecta": "Fusta"
+        },
+        {
+            "pregunta": "Quin tipus de monstres apareixen a les mines?",
+            "respuestas": [
+                "Zombis",
+                "Esquelets",
+                "Creepers",
+                "Ghasts"
+            ],
+            "respuestaCorrecta": "Zombis"
+        },
+        {
+            "pregunta": "Quin bloc de Minecraft es pot trobar a les platges i fons marins?",
+            "respuestas": [
+                "Sorra",
+                "Grau",
+                "Argila",
+                "Pedra de mar"
+            ],
+            "respuestaCorrecta": "Sorra"
+        },
+        {
+            "pregunta": "Com es diu el dimoni que apareix en el Nether de Minecraft?",
+            "respuestas": [
+                "Ghast",
+                "Blaze",
+                "Wither Skeleton",
+                "Zoglin"
+            ],
+            "respuestaCorrecta": "Blaze"
+        },
+        {
+            "pregunta": "Quin objectiu té el joc de Minecraft?",
+            "respuestas": [
+                "Sobreviure",
+                "Construir",
+                "Explorar",
+                "Crear"
+            ],
+            "respuestaCorrecta": "Sobreviure"
+        },
+        {
+            "pregunta": "Quins blocs es poden utilitzar per a fer una forn?",
+            "respuestas": [
+                "Pedra i fusta",
+                "Fusta i fusta",
+                "Pedra i pedra",
+                "Argila i fusta"
+            ],
+            "respuestaCorrecta": "Pedra i fusta"
+        },
+        {
+            "pregunta": "Quina criatura es pot domesticar i fer servir com a animal de companyia en Minecraft?",
+            "respuestas": [
+                "Llop",
+                "Ocelot",
+                "Panda",
+                "Cavall"
+            ],
+            "respuestaCorrecta": "Llop"
+        },
+        {
+            "pregunta": "Quin bloc s'utilitza per a crear portes en Minecraft?",
+            "respuestas": [
+                "Fusta",
+                "Pedra",
+                "Ferro",
+                "Diamant"
+            ],
+            "respuestaCorrecta": "Fusta"
+        },
+        {
+            "pregunta": "Què es pot fer amb les flors de Minecraft?",
+            "respuestas": [
+                "Plantar-les",
+                "Fer tints",
+                "Fer poções",
+                "Fer explosius"
+            ],
+            "respuestaCorrecta": "Fer tints"
+        },
+        {
+            "pregunta": "Quin bloc es pot utilitzar per a fer altres blocs de color en Minecraft?",
+            "respuestas": [
+                "Argila",
+                "Fusta",
+                "Pedra",
+                "Vidre"
+            ],
+            "respuestaCorrecta": "Argila"
+        },
+        {
+            "pregunta": "Quina és la distància màxima que pots llançar una perla d'ender a Minecraft?",
+            "respuestas": [
+              "100 blocs",
+              "150 blocs",
+              "200 blocs",
+              "250 blocs"
+            ],
+            "respuestaCorrecta": "100 blocs"
+          },
+          {
+            "pregunta": "Quants colors diferents hi ha en una carretilla de llana en Minecraft?",
+            "respuestas": [
+              "16 colors",
+              "32 colors",
+              "64 colors",
+              "128 colors"
+            ],
+            "respuestaCorrecta": "16 colors"
+          },
+          {
+            "pregunta": "Quin material no pot ser utilitzat per crear una pica en Minecraft?",
+            "respuestas": [
+              "Pedra",
+              "Diamant",
+              "Or",
+              "Ferro"
+            ],
+            "respuestaCorrecta": "Or"
+          },
+          {
+            "pregunta": "Quina és la longitud màxima d'un raig de redstone en Minecraft?",
+            "respuestas": [
+              "15 blocs",
+              "30 blocs",
+              "45 blocs",
+              "60 blocs"
+            ],
+            "respuestaCorrecta": "15 blocs"
+          },
+          {
+            "pregunta": "Quants blocs de vida té un Golem de Ferro en Minecraft?",
+            "respuestas": [
+              "50 blocs de vida",
+              "80 blocs de vida",
+              "100 blocs de vida",
+              "120 blocs de vida"
+            ],
+            "respuestaCorrecta": "100 blocs de vida"
+          },
+          {
+            "pregunta": "Quina és la quantitat màxima d'enemics que pot aparèixer en una onada en un Calabós en Minecraft?",
+            "respuestas": [
+              "10 enemics",
+              "20 enemics",
+              "30 enemics",
+              "40 enemics"
+            ],
+            "respuestaCorrecta": "30 enemics"
+          },
+          {
+            "pregunta": "Quin és el nom de la dimensió alternativa a l'End en Minecraft?",
+            "respuestas": [
+              "Nether",
+              "Overworld",
+              "The Void",
+              "The Aether"
+            ],
+            "respuestaCorrecta": "Nether"
+          },
+          {
+            "pregunta": "Quin material no es pot utilitzar per crear una portada en Minecraft?",
+            "respuestas": [
+              "Pedra",
+              "Fusta",
+              "Diamant",
+              "Obsidiana"
+            ],
+            "respuestaCorrecta": "Diamant"
+          },
+          {
+            "pregunta": "Quin és el nom de la criatura submarina hostil introduïda a la versió 'Aquatic Update' de Minecraft?",
+            "respuestas": [
+              "Guardià",
+              "Delfí",
+              "Calamar",
+              "Tortuga"
+            ],
+            "respuestaCorrecta": "Guardià"
+          },
+          {
+            "pregunta": "Quin és el nom del mineral que es pot utilitzar per crear eines i armadures a Minecraft?",
+            "respuestas": [
+              "Diamant",
+              "Emerald",
+              "Obsidiana",
+              "Netherite"
+            ],
+            "respuestaCorrecta": "Diamant"
+          }
+    ]
+}

@@ -1,0 +1,244 @@
+{
+    "Preguntas": [
+        {
+            "pregunta": "Quin és el nom del protagonista del videojoc de plataformes Super Mario Bros?",
+            "respuestas": [
+                "Mario",
+                "Luigi",
+                "Yoshi",
+                "Wario"
+            ],
+            "respuestaCorrecta": "Mario"
+        },
+        {
+            "pregunta": "Quin és el nom del personatge principal del videojoc de rol The Legend of Zelda?",
+            "respuestas": [
+                "Link",
+                "Zelda",
+                "Ganondorf",
+                "Sheik"
+            ],
+            "respuestaCorrecta": "Link"
+        },
+        {
+            "pregunta": "Quin és el nom del personatge principal del videojoc de conducció Mario Kart?",
+            "respuestas": [
+                "Mario",
+                "Luigi",
+                "Donkey Kong",
+                "Toad"
+            ],
+            "respuestaCorrecta": "Mario"
+        },
+        {
+            "pregunta": "Quin és el nom del personatge principal del videojoc de plataformes Sonic the Hedgehog?",
+            "respuestas": [
+                "Sonic",
+                "Knuckles",
+                "Tails",
+                "Amy"
+            ],
+            "respuestaCorrecta": "Sonic"
+        },
+        {
+            "pregunta": "Quina és la franquícia de videojocs de simulació de vida que ha venut més de 200 milions d'exemplars?",
+            "respuestas": [
+                "The Sims",
+                "Animal Crossing",
+                "Harvest Moon",
+                "Stardew Valley"
+            ],
+            "respuestaCorrecta": "The Sims"
+        },
+        {
+            "pregunta": "Quin és el nom del personatge principal del videojoc de rol Final Fantasy VII?",
+            "respuestas": [
+                "Cloud Strife",
+                "Squall Leonhart",
+                "Tifa Lockhart",
+                "Aerith Gainsborough"
+            ],
+            "respuestaCorrecta": "Cloud Strife"
+        },
+        {
+            "pregunta": "Quin és el nom del personatge principal del videojoc de carreres Gran Turismo?",
+            "respuestas": [
+                "Kazunori Yamauchi",
+                "Takumi Fujiwara",
+                "Ayrton Senna",
+                "Jordan Greer"
+            ],
+            "respuestaCorrecta": "Kazunori Yamauchi"
+        },
+        {
+            "pregunta": "Quin és el nom del personatge principal del videojoc de rol The Elder Scrolls V: Skyrim?",
+            "respuestas": [
+                "Dovahkiin",
+                "Aela the Huntress",
+                "Ulfric Stormcloak",
+                "Paarthurnax"
+            ],
+            "respuestaCorrecta": "Dovahkiin"
+        },
+        {
+            "pregunta": "Quin és el nom del personatge principal del videojoc de plataformes Donkey Kong Country?",
+            "respuestas": [
+                "Donkey Kong",
+                "Diddy Kong",
+                "King K. Rool",
+                "Cranky Kong"
+            ],
+            "respuestaCorrecta": "Donkey Kong"
+        },
+        {
+        "pregunta": "Quin és el nom del protagonista de la saga Assassin's Creed?",
+        "respuestas": [
+            "Ezio Auditore",
+            "Connor Kenway",
+            "Altair Ibn-La'Ahad",
+            "Edward Kenway"
+        ],
+        "respuestaCorrecta": "Altair Ibn-La'Ahad"
+        },
+        {
+        "pregunta": "En quin any es va publicar el videojoc Portal 2?",
+        "respuestas": [
+            "2011",
+            "2009",
+            "2013",
+            "2007"
+        ],
+        "respuestaCorrecta": "2011"
+        },
+        {
+        "pregunta": "En quin videojoc ens trobem al personatge Nathan Drake?",
+        "respuestas": [
+            "Uncharted",
+            "The Last of Us",
+            "God of War",
+            "Horizon Zero Dawn"
+        ],
+        "respuestaCorrecta": "Uncharted"
+        },
+        {
+        "pregunta": "Quin és el nom del protagonista del videojoc The Witcher?",
+        "respuestas": [
+            "Geralt de Rivia",
+            "Eredin Bréacc Glas",
+            "Triss Merigold",
+            "Yennefer of Vengerberg"
+        ],
+        "respuestaCorrecta": "Geralt de Rivia"
+        },
+        {
+        "pregunta": "Quin és el nom del personatge principal del videojoc Metal Gear Solid?",
+        "respuestas": [
+            "Solid Snake",
+            "Big Boss",
+            "Raiden",
+            "Liquid Snake"
+        ],
+        "respuestaCorrecta": "Solid Snake"
+        },
+        {
+            "pregunta": "Quin és el joc més venut de la història?",
+            "respuestas": [
+              "Minecraft",
+              "Grand Theft Auto V",
+              "Tetris",
+              "Super Mario Bros."
+            ],
+            "respuestaCorrecta": "Minecraft"
+          },
+          {
+            "pregunta": "En quin any es va llançar el primer joc de la sèrie 'The Legend of Zelda'?",
+            "respuestas": [
+              "1985",
+              "1986",
+              "1987",
+              "1988"
+            ],
+            "respuestaCorrecta": "1986"
+          },
+          {
+            "pregunta": "Quin és el nom del personatge principal al joc 'God of War'?",
+            "respuestas": [
+              "Kratos",
+              "Zeus",
+              "Ares",
+              "Poseidó"
+            ],
+            "respuestaCorrecta": "Kratos"
+          },
+          {
+            "pregunta": "Quin és el nom del mapa més popular al joc 'Fortnite'?",
+            "respuestas": [
+              "Tilted Towers",
+              "Pleasant Park",
+              "Salta de l'Autobús",
+              "Pico Polar"
+            ],
+            "respuestaCorrecta": "Salta de l'Autobús"
+          },
+          {
+            "pregunta": "Quin és el nom de l'enemic principal al joc 'Resident Evil'?",
+            "respuestas": [
+              "Némesis",
+              "Tyrant",
+              "Mr. X",
+              "William Birkin"
+            ],
+            "respuestaCorrecta": "Némesis"
+          },
+          {
+            "pregunta": "Quin és el nom del protagonista al joc 'The Witcher 3: Wild Hunt'?",
+            "respuestas": [
+              "Geralt de Rivia",
+              "Eskel",
+              "Lambert",
+              "Vesemir"
+            ],
+            "respuestaCorrecta": "Geralt de Rivia"
+          },
+          {
+            "pregunta": "Quin és el nom del vehicle utilitzat per Master Chief a la sèrie de jocs 'Halo'?",
+            "respuestas": [
+              "Warthog",
+              "Scorpion",
+              "Ghost",
+              "Pelican"
+            ],
+            "respuestaCorrecta": "Warthog"
+          },
+          {
+            "pregunta": "En quin any es va llançar el joc 'World of Warcraft'?",
+            "respuestas": [
+              "2002",
+              "2003",
+              "2004",
+              "2005"
+            ],
+            "respuestaCorrecta": "2004"
+          },
+          {
+            "pregunta": "Quin és el nom del germà de Mario a la sèrie de jocs 'Super Mario Bros.'?",
+            "respuestas": [
+              "Luigi",
+              "Wario",
+              "Yoshi",
+              "Toad"
+            ],
+            "respuestaCorrecta": "Luigi"
+          },
+          {
+            "pregunta": "Quin és el nom del personatge principal al joc 'The Last of Us'?",
+            "respuestas": [
+              "Joel",
+              "Ellie",
+              "Tommy",
+              "Sarah"
+            ],
+            "respuestaCorrecta": "Joel"
+          }
+    ]
+}

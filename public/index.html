@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" viewport="width=device-width">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">    <title>Juego de preguntas</title>
     <style>
 
@@ -9,12 +9,16 @@
 
 
     .titulo {
-      padding: 10px;
-      background-color: #FCFCFC ;
+      padding-top: 30px;
+      padding-left: 10px;
+    }
 
+    #contenedor-juego {
+      background-color: #ffffff ;
     }
 
       html, body {
+        background-color: #dddddd ;
         height: 100%;
         margin: 0;
         padding: 0;
@@ -34,7 +38,6 @@
       .contenedor{
         height: 100%;
         width: 100%;
-        background-color: pink;
         display: grid;
         grid-template-columns: 80% 20%;
         grid-template-rows: 15% 85%;
@@ -43,7 +46,7 @@
       .contenedor > .contenedor-juego {
         padding: 10px;
         font-size: 20px;
-        background-color: #FBFBFB;
+        background-color: #ffffff;
       }
 
 
@@ -81,19 +84,28 @@
       vertical-align: middle; /* Alinear verticalmente los elementos */
       margin-right: 10px; /* Añadir un margen derecho para separar los elementos */
     }
+
+    #boton0, #boton1, #boton2, #boton3 {
+      font-size: 30px;
+      box-shadow:
+       inset 0 -3em 3em rgba(0,0,0,0.1),
+             0 0  0 2px rgb(255,255,255),
+             0.3em 0.3em 1em rgba(0,0,0,0.3);
+    }
     </style>
   </head>
   <body>
     <div class="contenedor">
       <div class="titulo">
-      <h1>Juego de preguntas de League of Legends: </h1>
+      <h1>Joc de preguntes sobre videojocs: </h1>
       </div>
       <div class="contenedor-juego">
         <div id="formularioRegistro">
-          <label for="nombre">Ingrese su nombre:</label>
+          <label for="nombre">Indica el teu nom:</label>
           <input type="text" id="nombre" class="form-control"/>
-          <button class="btn btn-primary" onclick="unirseAlJuego()">Unirse al juego</button>
+          <button class="btn btn-primary" onclick="unirseAlJuego()">Unirse al Joc</button>
         </div>
+        <label style="display: none;" id="errorNombre" class="alert alert-danger" role="alert"></label>
 
         <div style="display: none;" id="pregunta"></div>
         <div style="display: none;" id="respuestas" class="contenedor-botones"></div>
@@ -103,21 +115,34 @@
 
         <div style="display: none;" id="cuenta">60</div>
         <div style="display: none;" id="cuenta-regresiva"></div>
-
         <div id="waiting">
-          <p style="display: none;" id="LoadingText">Esperando al resto de jugadores...</p>
-          <button style="display: none;" id="startButton">Empezar partida</button>
-        </div>
+          <p style="display: none;" id="LoadingText">Esperant a la resta de jugadors...</p>
+          <div style="display: none;" id="opcionsPreguntes">
+            <form>
+              <label>Temàtica de les preguntes: </label> <br>
+              <input type="radio" id="LOL" name="option" value="LOL" checked>
+              <label for="LOL">League of legends</label><br>
+              <input type="radio" id="GEN" name="option" value="GEN">
+              <label for="GEN">General</label><br>
+              <input type="radio" id="MC" name="option" value="MC">
+              <label for="MC">Minecraft</label><br>
+            </form>     
+          </div> 
+          <button style="display: none;" id="startButton" class="btn btn-primary">Començar partida</button>
+        </div> 
         <div id="ranking"></div>
         <div id="puntuacion"></div>
       </div>
       <div id="historialUsuarios">
-        <h2>Historial de jugadores</h2>
+        <h2>Historial de jugadors</h2>
         <ul></ul>
       </div>
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script>
+      var audioCorrect = new Audio('/audio/correct.mp3')
+      var audioIncorrect = new Audio('/audio/wrong.mp3');
+      var audioEnding = new Audio('/audio/end.mp3')
       const socket = io();
 
       //Variables para la aplicación
@@ -139,16 +164,23 @@
               document.getElementById("LoadingText").style.display = "block";
               document.getElementById("formularioRegistro").style.display = "none";
               document.getElementById("startButton").style.display = "none";
+              document.getElementById("opcionsPreguntes").style.display = "none";
               socket.emit("nuevoJugador",nombre)
               usuarioRegistrado = true;
+              document.getElementById("errorNombre").style.display = "none";
+              document.getElementById("errorNombre").innerHTML = ""
             } else {
               document.getElementById("formularioRegistro").style.display = "none";
               document.getElementById("startButton").style.display = "block";
+              document.getElementById("opcionsPreguntes").style.display = "block";
               socket.emit("nuevoJugador","admin")
               usuarioRegistrado = true;
+              document.getElementById("errorNombre").style.display = "none";
+              document.getElementById("errorNombre").innerHTML = ""
             }
           } else {
-            console.log("Nombre repetido")
+            document.getElementById("errorNombre").style.display = "block";
+              document.getElementById("errorNombre").innerHTML = "El nom està repetit"
           }
         })
       }
@@ -168,6 +200,7 @@
       }, 1000);
 
         setTimeout(() => {
+          audioEnding.play();
           detenerPartida();
         }, 60000); // 60000 milisegundos = 1 minuto
       }
@@ -178,6 +211,7 @@
           document.getElementById("tiempo-restante").style.display = "block";
           document.getElementById("cuenta-regresiva").style.display = "block";
           document.getElementById("waiting").style.display = "none";
+          document.getElementById("opcionsPreguntes").style.display = "none";
       }
 
       function noMostrarPreguntas () {
@@ -197,6 +231,19 @@
     }
 
       startButton.addEventListener("click", () => {
+      
+        var opciones = document.getElementsByName('option');
+        var seleccionado = '';
+
+        for (var i = 0; i < opciones.length; i++) {
+          if (opciones[i].checked) {
+            seleccionado = opciones[i].value;
+            break;
+          }
+        }
+
+        socket.emit("preguntasSeleccion", seleccionado);
+        
       socket.emit("start");
       mostrarTiempoPartida()
       });
@@ -328,6 +375,7 @@
       });
 
       socket.on('timerEnded', (jugadores) => {
+        document.getElementById("ranking").style.display = "block";
         document.getElementById("puntuacion").style.display = "none";
         noMostrarPreguntas();
         var top3 = obtenerTresMejoresJugadores(jugadores);
@@ -396,10 +444,19 @@
 
         historialUsuarios.forEach((usuario) => {
           const usuarioEl = document.createElement("div");
-          usuarioEl.innerText = usuario + " se ha añadido a la partida";
+          usuarioEl.innerText = usuario + " s'ha afegit a la partida";
           historialUsuariosEl.appendChild(usuarioEl);
         });
       });
+
+      socket.on("SoundCorrect", () => { 
+        audioCorrect.play();
+      })
+
+      socket.on("SoundIncorrect", () => {
+        audioIncorrect.play();
+      })
+
     </script>
   </body>
 </html>

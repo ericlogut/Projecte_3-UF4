@@ -1,0 +1,344 @@
+{
+    "Preguntas": [
+        {
+            "pregunta": "Quin és el nom del personatge principal del videojoc League of Legends?",
+            "respuestas": [
+                "Lee Sin",
+                "Ezreal",
+                "Yasuo",
+                "Ahri"
+            ],
+            "respuestaCorrecta": "Ahri"
+        },
+        {
+            "pregunta": "Quina és la posició més comuna per a Ahri en el camp de batalla?",
+            "respuestas": [
+                "Suport",
+                "Assassin",
+                "Mago",
+                "Tanque"
+            ],
+            "respuestaCorrecta": "Assassin"
+        },
+        {
+            "pregunta": "Quin equip ha guanyat més títols mundials de League of Legends?",
+            "respuestas": [
+                "SK Telecom T1",
+                "Samsung Galaxy",
+                "Invictus Gaming",
+                "G2 Esports"
+            ],
+            "respuestaCorrecta": "SK Telecom T1"
+        },
+        {
+            "pregunta": "Quin personatge té la capacitat de regenerar-se de manera automàtica en League of Legends?",
+            "respuestas": [
+                "Vladimir",
+                "Darius",
+                "Olaf",
+                "Rengar"
+            ],
+            "respuestaCorrecta": "Vladimir"
+        },
+        {
+            "pregunta": "Quina posició és la més comuna per a un personatge com Jinx?",
+            "respuestas": [
+                "AD Carry",
+                "Suport",
+                "Assassin",
+                "Tanque"
+            ],
+            "respuestaCorrecta": "AD Carry"
+        },
+        {
+            "pregunta": "Quin personatge pot crear portes per a ell i el seu equip?",
+            "respuestas": [
+                "Bard",
+                "LeBlanc",
+                "Zoe",
+                "Aurelion Sol"
+            ],
+            "respuestaCorrecta": "Bard"
+        },
+        {
+            "pregunta": "Quina posició sol jugar un personatge com Braum?",
+            "respuestas": [
+                "Suport",
+                "Assassin",
+                "Mago",
+                "Tanque"
+            ],
+            "respuestaCorrecta": "Suport"
+        },
+        {
+            "pregunta": "Quina posició sol jugar un personatge com Darius?",
+            "respuestas": [
+                "Suport",
+                "Assassin",
+                "Mago",
+                "Tanque"
+            ],
+            "respuestaCorrecta": "Tanque"
+        },
+        {
+            "pregunta": "Quin personatge té la capacitat de convertir-se en una serp?",
+            "respuestas": [
+                "Cassiopeia",
+                "Malzahar",
+                "Cho'Gath",
+                "Karthus"
+            ],
+            "respuestaCorrecta": "Cassiopeia"
+        },
+        {
+            "pregunta": "Quina posició és la més comuna per a un personatge com Teemo?",
+            "respuestas": [
+                "Top",
+                "Jungla",
+                "Mitjana",
+                "Suport"
+            ],
+            "respuestaCorrecta": "Top"
+        },
+        {
+            "pregunta": "Quin personatge pot teletransportar-se a través del mapa de League of Legends?",
+            "respuestas": [
+                "Kassadin",
+                "Twisted Fate",
+                "Ekko",
+                "Syndra"
+            ],
+            "respuestaCorrecta": "Twisted Fate"
+        },
+        {
+            "pregunta": "Quina posició sol jugar un personatge com Thresh?",
+            "respuestas": [
+                "Suport",
+                "Assassin",
+                "Mago",
+                "Tanque"
+            ],
+            "respuestaCorrecta": "Suport"
+        },
+        {
+            "pregunta": "Quin personatge té la capacitat de robar vida als seus enemics?",
+            "respuestas": [
+                "Swain",
+                "Azir",
+                "Zed",
+                "Yasuo"
+            ],
+            "respuestaCorrecta": "Swain"
+        },
+        {
+            "pregunta": "Quina posició sol jugar un personatge com Yasuo?",
+            "respuestas": [
+                "Top o Mitjana",
+                "Jungla",
+                "Suport",
+                "Tanque"
+            ],
+            "respuestaCorrecta": "Top o Mitjana"
+        },
+        {
+            "pregunta": "Quin personatge pot canviar de forma en funció dels seus atacs?",
+            "respuestas": [
+                "Nidalee",
+                "Riven",
+                "Warwick",
+                "Garen"
+            ],
+            "respuestaCorrecta": "Nidalee"
+        },
+        {
+            "pregunta": "Quin és el nom del campió que controla el gel a League of Legends?",
+            "respuestas": [
+                "Ashe",
+                "Braum",
+                "Lissandra",
+                "Anivia"
+            ],
+            "respuestaCorrecta": "Lissandra"
+        },
+        {
+            "pregunta": "Quina és la posició principal de joc per a un campió com Miss Fortune?",
+            "respuestas": [
+                "Tanque",
+                "Jungla",
+                "ADC",
+               "Mago"
+            ],
+            "respuestaCorrecta": "ADC"
+        },
+        {
+            "pregunta": "Quin campió té la habilitat de transformar-se en un ratpenat?",
+            "respuestas": [
+                "Vladimir",
+                "Swain",
+                "Elise",
+                "Nocturne"
+            ],
+            "respuestaCorrecta": "Vladimir"
+        },
+        {
+            "pregunta": "Quina és la posició més comuna de joc per a un campió com Elise?",
+            "respuestas": [
+                "Tanque",
+                "Mitjana",
+                "Suport",
+                "Assassina"
+            ],
+            "respuestaCorrecta": "Assassina"
+        },
+        {
+            "pregunta": "Quin campió té la habilitat de canviar de forma entre una dona i una aranya?",
+            "respuestas": [
+                "Rengar",
+                "Nidalee",
+                "Elise",
+                "Udyr"
+            ],
+            "respuestaCorrecta": "Elise"
+        },
+        {
+            "pregunta": "Quin és el nom del campió que controla el vent a League of Legends?",
+            "respuestas": [
+                "Janna",
+                "Yasuo",
+                "Zephyr",
+                "Riven"
+            ],
+            "respuestaCorrecta": "Yasuo"
+        },
+        {
+            "pregunta": "Quina és la posició principal de joc per a un campió com Malphite?",
+            "respuestas": [
+                "Mago",
+                "Suport",
+                "Assassí",
+                "Tanque"
+            ],
+            "respuestaCorrecta": "Tanque"
+        },
+        {
+            "pregunta": "Quin campió té la habilitat de ressuscitar després de ser derrotat?",
+            "respuestas": [
+                "Zilean",
+                "Karthus",
+                "Mordekaiser",
+                "Sion"
+            ],
+            "respuestaCorrecta": "Mordekaiser"
+        },
+        {
+            "pregunta": "Quina és la posició més comuna de joc per a un campió com Syndra?",
+            "respuestas": [
+                "ADC",
+                "Tanque",
+                "Mitjana",
+                "Mago"
+            ],
+            "respuestaCorrecta": "Mitjana"
+        },
+        {
+            "pregunta": "Quin campió té la habilitat de crear torres que l'ajuden en la batalla?",
+            "respuestas": [
+                "Heimerdinger",
+                "Zyra",
+                "Malzahar",
+                "Taliyah"
+            ],
+            "respuestaCorrecta": "Heimerdinger"
+        },
+        {
+            "pregunta": "Quin és el nom del personatge que pot invocar dracs a League of Legends?",
+            "respuestas": [
+                "Shyvana",
+                "Aurelion Sol",
+                "Tristana",
+                "Pantheon"
+            ],
+            "respuestaCorrecta": "Aurelion Sol"
+        },
+        {
+            "pregunta": "Quin personatge té la capacitat de crear portals per moure's per tot el mapa en League of Legends?",
+            "respuestas": [
+                "Ryze",
+                "Bard",
+                "Twisted Fate",
+                "Tahm Kench"
+            ],
+            "respuestaCorrecta": "Bard"
+        },
+        {
+            "pregunta": "Quin és el nom del personatge que pot transformar-se en un drac a League of Legends?",
+            "respuestas": [
+                "Pantheon",
+                "Sett",
+                "Shyvana",
+                "Volibear"
+            ],
+            "respuestaCorrecta": "Shyvana"
+        },
+        {
+            "pregunta": "Quin personatge té la capacitat de crear una zona de seguretat invulnerable a League of Legends?",
+            "respuestas": [
+                "Kayle",
+                "Morgana",
+                "Lux",
+                "Karma"
+            ],
+            "respuestaCorrecta": "Kayle"
+        },
+        {
+            "pregunta": "Quin és el nom del personatge que pot clonar-se a si mateix a League of Legends?",
+            "respuestas": [
+                "LeBlanc",
+                "Wukong",
+                "Neeko",
+                "Shaco"
+            ],
+            "respuestaCorrecta": "Shaco"
+        },
+        {
+            "pregunta": "Quin personatge té la capacitat de reviure als seus aliats a League of Legends?",
+            "respuestas": [
+                "Soraka",
+                "Zilean",
+                "Yorick",
+                "Aatrox"
+            ],
+            "respuestaCorrecta": "Yorick"
+        },
+        {
+            "pregunta": "Quin és el nom del personatge que pot crear un mur de gel a League of Legends?",
+            "respuestas": [
+                "Anivia",
+                "Lissandra",
+                "Taliyah",
+                "Ashe"
+            ],
+            "respuestaCorrecta": "Taliyah"
+        },
+        {
+            "pregunta": "Quin personatge té la capacitat de crear una tempesta de neu a League of Legends?",
+            "respuestas": [
+                "Sejuani",
+                "Trundle",
+                "Nunu & Willump",
+                "Lissandra"
+            ],
+            "respuestaCorrecta": "Lissandra"
+        },
+        {
+            "pregunta": "Quin és el nom del personatge que pot crear una bomba a League of Legends que explota després d'un temps?",
+            "respuestas": [
+                "Ziggs",
+                "Jinx",
+                "Teemo",
+                "Heimerdinger"
+            ],
+            "respuestaCorrecta": "Ziggs"
+        }
+    ]
+}

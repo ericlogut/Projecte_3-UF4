@@ -18,24 +18,12 @@ app.get("/", (req, res) => {
 var nombres = [];
 
 // Array de preguntas para el juego
-let preguntas = [ 
-  {
-    pregunta: "¿Cuál es la capital de España?",
-    respuestas: ["Madrid", "Barcelona", "Sevilla", "Valencia"],
-    respuestaCorrecta: "Madrid",
-  },
-  {
-    pregunta: "¿En qué país se encuentra la Torre Eiffel?",
-    respuestas: ["Italia", "Francia", "Alemania", "Reino Unido"],
-    respuestaCorrecta: "Francia",
-  },
-  {
-    pregunta: "¿Cuál es el río más largo del mundo?",
-    respuestas: ["Nilo", "Amazonas", "Misisipi", "Yangtse"],
-    respuestaCorrecta: "Amazonas",
-  },
-];
+// Preguntas del JSON
+const preguntasJSONLOL = require('../Projecte_3-UF4/preguntasLOL.json');
+const preguntasJSONGEN = require('../Projecte_3-UF4/preguntasGEN.json');
+const preguntasJSONMC = require('../Projecte_3-UF4/preguntasMC.json');
 
+var preguntas = preguntasJSONLOL.Preguntas;
 // Objeto para guardar los jugadores conectados
 const jugadores = {};
 var pregunta = {};
@@ -70,6 +58,16 @@ socket.on("nuevoJugador", (nombre) => {
   io.emit("actualizarHistorialUsuarios", historialUsuarios);
 });  
 
+socket.on("preguntasSeleccion", (seleccionado) => {
+  if (seleccionado == "LOL") {
+    preguntas = preguntasJSONLOL.Preguntas;
+  } else if (seleccionado == "GEN") {
+    preguntas = preguntasJSONGEN.Preguntas;
+  } else if (seleccionado == "MC") {
+    preguntas = preguntasJSONMC.Preguntas;
+  }
+});
+
 socket.on("comprovarNombre", (nombre) => {
   if (nombres.includes(nombre)) {
     io.emit("nombreRepetido", true)
@@ -88,7 +86,10 @@ socket.on("enviarRespuesta", (respuesta) => {
   if (esCorrecta) {
     // Sumar un punto al jugador
     jugador.puntos++;
-  } 
+    socket.emit("SoundCorrect");
+  } else {
+    socket.emit("SoundIncorrect");
+  }
  // Obtener una nueva pregunta y actualizar la variable preguntaActual
    pregunta = obtenerPreguntaActual();
 
