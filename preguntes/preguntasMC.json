@@ -299,6 +299,96 @@
               "Netherite"
             ],
             "respuestaCorrecta": "Diamant"
-          }
+          },
+          {
+            "pregunta": "Quin mineral es necessari per fabricar armadures i eines de Netherite a Minecraft?",
+            "respuestas": [
+            "Fragments de Netherite",
+            "Lingots de Netherite",
+            "Bloc de Netherite",
+            "Polvora de Netherite"
+            ],
+            "respuestaCorrecta": "Lingots de Netherite"
+            },
+            {
+            "pregunta": "Quin és l'enemic volador hostil que apareix quan el jugador no ha dormit durant tres dies a Minecraft?",
+            "respuestas": [
+            "Phantom",
+            "Ender Dragon",
+            "Ghast",
+            "Vex"
+            ],
+            "respuestaCorrecta": "Phantom"
+            },
+            {
+            "pregunta": "Quin tipus de bloc es pot utilitzar per a fabricar un far a Minecraft?",
+            "respuestas": [
+            "Bloc de diamant",
+            "Bloc d'or",
+            "Bloc d'esmeralda",
+            "Bloc de ferro"
+            ],
+            "respuestaCorrecta": "Bloc d'esmeralda"
+            },
+            {
+            "pregunta": "Quin és el límit màxim d'estirament d'un pistó normal a Minecraft?",
+            "respuestas": [
+            "1 bloc",
+            "2 blocs",
+            "3 blocs",
+            "4 blocs"
+            ],
+            "respuestaCorrecta": "1 bloc"
+            },
+            {
+            "pregunta": "Quin és el límit màxim d'estirament d'un pistó enganxós a Minecraft?",
+            "respuestas": [
+            "1 bloc",
+            "2 blocs",
+            "3 blocs",
+            "4 blocs"
+            ],
+            "respuestaCorrecta": "1 bloc"
+            },
+            {
+            "pregunta": "Quin és el nom de la criatura neutral que es troba al Nether a Minecraft?",
+            "respuestas": [
+            "Zombi piglin",
+            "Enderman",
+            "Ghast",
+            "Wither Esquelet"
+            ],
+            "respuestaCorrecta": "Zombi piglin"
+            },
+            {
+            "pregunta": "Quin element es necessita per a fabricar una antorxa a Minecraft?",
+            "respuestas": [
+            "Fusta",
+            "Carbó",
+            "Polvora",
+            "Redstone"
+            ],
+            "respuestaCorrecta": "Carbó"
+            },
+            {
+            "pregunta": "Quin és el nom de la criatura que dispara fletxes a Minecraft?",
+            "respuestas": [
+            "Esquelet",
+            "Zombi",
+            "Creeper",
+            "Enderman"
+            ],
+            "respuestaCorrecta": "Esquelet"
+            },
+            {
+            "pregunta": "Quin és el nom de la criatura subterrània que apareix a les mines abandonades a Minecraft?",
+            "respuestas": [
+            "Cavaller aranya",
+            "Aranya",
+            "Zombi",
+            "Creeper"
+            ],
+            "respuestaCorrecta": "Cavaller aranya"
+            }
     ]
 }

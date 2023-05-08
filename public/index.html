@@ -140,6 +140,7 @@
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script>
+      var respostaComparar = "";
       var audioCorrect = new Audio('/audio/correct.mp3')
       var audioIncorrect = new Audio('/audio/wrong.mp3');
       var audioEnding = new Audio('/audio/end.mp3')
@@ -334,6 +335,7 @@
         // Mostrar la pregunta
         preguntaEl.innerText = pregunta.pregunta;
 
+        respostaComparar = pregunta.respuestaCorrecta;
         // Mostrar las opciones de respuesta
         respuestasEl.innerHTML = "";
         var i = 0;
@@ -343,7 +345,7 @@
           opcionEl.setAttribute("id", "boton"+i)
 
           opcionEl.addEventListener("click", () => {
-            socket.emit("enviarRespuesta", respuesta);
+            socket.emit("enviarRespuesta", respuesta, respostaComparar);
 
             // Detener el temporizador
            clearInterval(temporizador);

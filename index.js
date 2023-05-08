@@ -37,8 +37,8 @@ function obtenerPreguntaActual() {
 }
 
 // Función para comprobar si una respuesta es correcta
-function comprobarRespuesta(pregunta, respuesta) {
-  return pregunta.respuestaCorrecta === respuesta;// Manejador de eventos para cuando un jugador se conecta
+function comprobarRespuesta(respostaComparar, respuesta) {
+  return respostaComparar == respuesta; // Manejador de eventos para cuando un jugador se conecta
 }
 
 io.on("connection", (socket) => {
@@ -79,10 +79,10 @@ socket.on("comprovarNombre", (nombre) => {
 });
 
 // Manejador de eventos para cuando un jugador envía una respuesta
-socket.on("enviarRespuesta", (respuesta) => {
+socket.on("enviarRespuesta", (respuesta, respostaComparar) => {
   const jugador = jugadores[socket.id];
   // Comprobar si la respuesta es correcta
-  const esCorrecta = comprobarRespuesta(pregunta, respuesta);
+  const esCorrecta = comprobarRespuesta(respostaComparar, respuesta);
 
   if (esCorrecta) {
     // Sumar un punto al jugador
