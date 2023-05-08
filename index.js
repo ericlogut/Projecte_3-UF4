@@ -38,8 +38,9 @@ function obtenerPreguntaActual() {
 
 // Función para comprobar si una respuesta es correcta
 function comprobarRespuesta(pregunta, respuesta) {
-  console.log("Comprovar esta: " + pregunta.respuestaCorrecta + " Se comprueva esta: "+ respuesta);
   return pregunta.respuestaCorrecta === respuesta;// Manejador de eventos para cuando un jugador se conecta
+}
+
 io.on("connection", (socket) => {
   console.log(`Jugador conectado: ${socket.id}`);
   
@@ -134,7 +135,6 @@ socket.on('start', () => {
       socket.emit("actualizarPuntuacion", jugadores);
     });
   });
-}
   
   
   // Iniciar el servidor
