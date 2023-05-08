@@ -389,6 +389,96 @@
             "Creeper"
             ],
             "respuestaCorrecta": "Cavaller aranya"
-            }
+            },
+            {
+"pregunta": "Quin és el nom de la criatura hostil que es troba a l'End a Minecraft?",
+"respuestas": [
+"Enderman",
+"Shulker",
+"Phantom",
+"Vex"
+],
+"respuestaCorrecta": "Shulker"
+},
+{
+"pregunta": "Quin és el nom de la criatura que apareix a les fortificacions del Nether a Minecraft?",
+"respuestas": [
+"Wither Esquelet",
+"Zombi piglin",
+"Ghast",
+"Blaze"
+],
+"respuestaCorrecta": "Wither Esquelet"
+},
+{
+"pregunta": "Quin tipus de bloc es pot utilitzar per a fabricar una tarta a Minecraft?",
+"respuestas": [
+"Sucre",
+"Gra",
+"Ou",
+"Llet"
+],
+"respuestaCorrecta": "Gra"
+},
+{
+"pregunta": "Quin és el nom dels esdeveniments de redstone que poden ser generats per diferents causes a Minecraft?",
+"respuestas": [
+"Bucle de redstone",
+"Senyal de redstone",
+"Puls de redstone",
+"Actuador de redstone"
+],
+"respuestaCorrecta": "Senyal de redstone"
+},
+{
+"pregunta": "Quin és el nom de la criatura pacífica que es troba als boscos de Minecraft?",
+"respuestas": [
+"Ovella",
+"Vaquet",
+"Gallina",
+"Porc"
+],
+"respuestaCorrecta": "Ovella"
+},
+{
+"pregunta": "Quin és el nom del bloc que permet al jugador emmagatzemar llibres encantats a Minecraft?",
+"respuestas": [
+"Estant de llibres",
+"Caixa de música",
+"Banc d'encantaments",
+"Pedestal de llibres"
+],
+"respuestaCorrecta": "Estant de llibres"
+},
+{
+"pregunta": "Quin bloc de Minecraft es pot utilitzar per a crear un portal a l'End?",
+"respuestas": [
+"Bastidor d'End",
+"Obsidiana",
+"Bloc de pedra de l'End",
+"Portal de l'End"
+],
+"respuestaCorrecta": "Bastidor d'End"
+},
+{
+"pregunta": "Quin objecte es necessita per convocar el Wither a Minecraft?",
+"respuestas": [
+"Ull d'Ender",
+"Esfera de Wither",
+"Cap d'esquelet de Wither",
+"Bloc de diamant"
+],
+"respuestaCorrecta": "Cap d'esquelet de Wither"
+},
+{
+"pregunta": "Quin tipus de bloc es pot utilitzar per a fabricar un encenedor a Minecraft?",
+"respuestas": [
+"Ferro",
+"Pedra",
+"Obsidiana",
+"Or"
+],
+"respuestaCorrecta": "Ferro"
+}
     ]
 }
