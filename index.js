@@ -19,9 +19,9 @@ var nombres = [];
 
 // Array de preguntas para el juego
 // Preguntas del JSON
-const preguntasJSONLOL = require('../Projecte_3-UF4/preguntasLOL.json');
-const preguntasJSONGEN = require('../Projecte_3-UF4/preguntasGEN.json');
-const preguntasJSONMC = require('../Projecte_3-UF4/preguntasMC.json');
+const preguntasJSONLOL = require('./preguntes/preguntasLOL.json');
+const preguntasJSONGEN = require('./preguntes/preguntasGEN.json');
+const preguntasJSONMC = require('./preguntes/preguntasMC.json');
 
 var preguntas = preguntasJSONLOL.Preguntas;
 // Objeto para guardar los jugadores conectados
@@ -38,12 +38,12 @@ function obtenerPreguntaActual() {
 
 // Función para comprobar si una respuesta es correcta
 function comprobarRespuesta(pregunta, respuesta) {
-  return pregunta.respuestaCorrecta === respuesta;
-}
-
-// Manejador de eventos para cuando un jugador se conecta
+  console.log("Comprovar esta: " + pregunta.respuestaCorrecta + " Se comprueva esta: "+ respuesta);
+  return pregunta.respuestaCorrecta === respuesta;// Manejador de eventos para cuando un jugador se conecta
 io.on("connection", (socket) => {
   console.log(`Jugador conectado: ${socket.id}`);
+  
+  
 
 // Guardar al jugador en el objeto de jugadores
 socket.on("nuevoJugador", (nombre) => {
@@ -134,6 +134,7 @@ socket.on('start', () => {
       socket.emit("actualizarPuntuacion", jugadores);
     });
   });
+}
   
   
   // Iniciar el servidor
