@@ -14,56 +14,37 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
 });
 
-// Array de preguntas para el juego
-let preguntas = [
-  {
-    pregunta: "¿Cuál es la capital de España?",
-    respuestas: ["Madrid", "Barcelona", "Sevilla", "Valencia"],
-    respuestaCorrecta: "Madrid",
-  },
-  {
-    pregunta: "¿En qué país se encuentra la Torre Eiffel?",
-    respuestas: ["Italia", "Francia", "Alemania", "Reino Unido"],
-    respuestaCorrecta: "Francia",
-  },
-  {
-    pregunta: "¿Cuál es el río más largo del mundo?",
-    respuestas: ["Nilo", "Amazonas", "Misisipi", "Yangtse"],
-    respuestaCorrecta: "Amazonas",
-  },
-];
 
+var nombres = [];
+
+// Array de preguntas para el juego
+// Preguntas del JSON
+const preguntasJSONLOL = require('./preguntes/preguntasLOL.json');
+const preguntasJSONGEN = require('./preguntes/preguntasGEN.json');
+const preguntasJSONMC = require('./preguntes/preguntasMC.json');
+
+var preguntas = preguntasJSONLOL.Preguntas;
 // Objeto para guardar los jugadores conectados
 const jugadores = {};
+var pregunta = {};
 let preguntaActualIndex = 0;
-
-let temporizador;
-const DURACION_TEMPORIZADOR = 10000; // 10 segundos en milisegundos
-
 
 // Función para obtener una pregunta aleatoria del array de preguntas
 function obtenerPreguntaActual() {
-  const pregunta = preguntas[preguntaActualIndex];
+  pregunta = preguntas[preguntaActualIndex];
   preguntaActualIndex = (preguntaActualIndex + 1) % preguntas.length;
-   // Iniciar el temporizador
-   temporizador = setTimeout(() => {
-    // Si el temporizador termina, obtener la siguiente pregunta y enviarla al jugador
-    const siguientePregunta = obtenerPreguntaActual();
-    io.emit("nuevaPregunta", siguientePregunta);
-  }, DURACION_TEMPORIZADOR);
   return pregunta;
 }
 
-
-
 // Función para comprobar si una respuesta es correcta
-function comprobarRespuesta(pregunta, respuesta) {
-  return pregunta.respuestaCorrecta === respuesta;
+function comprobarRespuesta(respostaComparar, respuesta) {
+  return respostaComparar == respuesta; // Manejador de eventos para cuando un jugador se conecta
 }
 
-// Manejador de eventos para cuando un jugador se conecta
 io.on("connection", (socket) => {
   console.log(`Jugador conectado: ${socket.id}`);
+  
+  
 
 // Guardar al jugador en el objeto de jugadores
 socket.on("nuevoJugador", (nombre) => {
@@ -76,28 +57,42 @@ socket.on("nuevoJugador", (nombre) => {
   // Enviar historial de usuarios a todos los clientes
   const historialUsuarios = Object.values(jugadores).map((jugador) => jugador.nombre);
   io.emit("actualizarHistorialUsuarios", historialUsuarios);
+});  
+
+socket.on("preguntasSeleccion", (seleccionado) => {
+  if (seleccionado == "LOL") {
+    preguntas = preguntasJSONLOL.Preguntas;
+  } else if (seleccionado == "GEN") {
+    preguntas = preguntasJSONGEN.Preguntas;
+  } else if (seleccionado == "MC") {
+    preguntas = preguntasJSONMC.Preguntas;
+  }
 });
 
-  // Enviar la pregunta inicial al jugador
-  let pregunta = obtenerPreguntaActual();
-  socket.emit("nuevaPregunta", pregunta);
-  
+socket.on("comprovarNombre", (nombre) => {
+  if (nombres.includes(nombre)) {
+    io.emit("nombreRepetido", true)
+  } else {
+    nombres.push(nombre);
+    io.emit("nombreRepetido", false)
+  }
+});
 
 // Manejador de eventos para cuando un jugador envía una respuesta
-socket.on("enviarRespuesta", (respuesta) => {
+socket.on("enviarRespuesta", (respuesta, respostaComparar) => {
   const jugador = jugadores[socket.id];
-
   // Comprobar si la respuesta es correcta
-  const esCorrecta = comprobarRespuesta(pregunta, respuesta);
+  const esCorrecta = comprobarRespuesta(respostaComparar, respuesta);
 
   if (esCorrecta) {
     // Sumar un punto al jugador
     jugador.puntos++;
-  } 
-
- // Cancelar el temporizador actual y obtener una nueva pregunta
- clearTimeout(temporizador);
- pregunta = obtenerPreguntaActual();
+    socket.emit("SoundCorrect");
+  } else {
+    socket.emit("SoundIncorrect");
+  }
+ // Obtener una nueva pregunta y actualizar la variable preguntaActual
+   pregunta = obtenerPreguntaActual();
 
   // Enviar una nueva pregunta al jugador
   socket.emit("nuevaPregunta", pregunta);
@@ -105,6 +100,25 @@ socket.on("enviarRespuesta", (respuesta) => {
   // Emitir un evento a todos los jugadores para actualizar la puntuación
   io.emit("actualizarPuntuacion", jugadores);
 });
+
+socket.on('start', () => {
+  // Enviar la pregunta inicial al jugador
+  let preguntaParaUsar = obtenerPreguntaActual();
+  io.emit("nuevaPregunta", preguntaParaUsar);
+  io.emit('mostrarPreguntaYRespuestas');
+
+  const timer = setInterval(() => {
+    console.log('Temporizador iniciado!');
+    
+    // Enviamos la señal al  cliente cuando el temporizador ha terminado
+    io.emit('timerEnded', jugadores);
+    
+    // Limpiamos el temporizador después de un minuto
+    clearInterval(timer);
+  }, 60000);
+
+});
+
 
 
     // Manejador de eventos para cuando un jugador se desconecta
@@ -118,9 +132,10 @@ socket.on("enviarRespuesta", (respuesta) => {
     io.emit("actualizarHistorialUsuarios", historialUsuarios);
   
       // Emitir un evento a todos los jugadores para actualizar la puntuación
-      io.emit("actualizarPuntuacion", jugadores);
+      socket.emit("actualizarPuntuacion", jugadores);
     });
   });
+  
   
   // Iniciar el servidor
   const PORT = process.env.PORT || 3000;
