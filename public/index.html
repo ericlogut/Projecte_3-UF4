@@ -281,7 +281,7 @@
 
         // Actualizar el valor del cronómetro y el tiempo restante
         cuentaEl.innerText = tiempoActual;
-        cuentaRegresivaEl.innerText = `Tiempo restante partida: ${tiempoActual} segundos`;
+        cuentaRegresivaEl.innerText = `Temps restant partida: ${tiempoActual} segons`;
       }
 
       // Función para actualizar el cronómetro
@@ -311,7 +311,7 @@
 
       // Actualizar el valor del cronómetro y el tiempo restante
       cronometroEl.innerText = tiempoActual;
-      tiempoRestanteEl.innerText = `Tiempo restante pregunta: ${tiempoActual} segundos`;
+      tiempoRestanteEl.innerText = `Temps restant pregunta: ${tiempoActual} segons`;
     } 
 
       // Manejador de eventos para cuando se recibe una nueva pregunta
@@ -371,7 +371,7 @@
         Object.keys(jugadores).forEach((jugadorId) => {
           const jugador = jugadores[jugadorId];
           const jugadorEl = document.createElement("div");
-          jugadorEl.innerText = `${jugador.nombre}: ${jugador.puntos} puntos`;
+          jugadorEl.innerText = `${jugador.nombre}: ${jugador.puntos} punts`;
           puntuacionEl.appendChild(jugadorEl);
         });
       });
@@ -392,10 +392,10 @@
       // Crea la fila de encabezado de la tabla
       const encabezado = document.createElement("tr");
       const nombreEncabezado = document.createElement("th");
-      nombreEncabezado.textContent = "Nombre";
+      nombreEncabezado.textContent = "Nom";
       nombreEncabezado.classList.add("text-center"); // Agrega la clase "text-center" de Bootstrap al encabezado del nombre
       const puntosEncabezado = document.createElement("th");
-      puntosEncabezado.textContent = "Puntos";
+      puntosEncabezado.textContent = "Punts";
       puntosEncabezado.classList.add("text-center"); // Agrega la clase "text-center" de Bootstrap al encabezado de los puntos
       encabezado.appendChild(nombreEncabezado);
       encabezado.appendChild(puntosEncabezado);
