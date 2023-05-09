@@ -391,94 +391,184 @@
             "respuestaCorrecta": "Cavaller aranya"
             },
             {
-"pregunta": "Quin és el nom de la criatura hostil que es troba a l'End a Minecraft?",
-"respuestas": [
-"Enderman",
-"Shulker",
-"Phantom",
-"Vex"
-],
-"respuestaCorrecta": "Shulker"
-},
-{
-"pregunta": "Quin és el nom de la criatura que apareix a les fortificacions del Nether a Minecraft?",
-"respuestas": [
-"Wither Esquelet",
-"Zombi piglin",
-"Ghast",
-"Blaze"
-],
-"respuestaCorrecta": "Wither Esquelet"
-},
-{
-"pregunta": "Quin tipus de bloc es pot utilitzar per a fabricar una tarta a Minecraft?",
-"respuestas": [
-"Sucre",
-"Gra",
-"Ou",
-"Llet"
-],
-"respuestaCorrecta": "Gra"
-},
-{
-"pregunta": "Quin és el nom dels esdeveniments de redstone que poden ser generats per diferents causes a Minecraft?",
-"respuestas": [
-"Bucle de redstone",
-"Senyal de redstone",
-"Puls de redstone",
-"Actuador de redstone"
-],
-"respuestaCorrecta": "Senyal de redstone"
-},
-{
-"pregunta": "Quin és el nom de la criatura pacífica que es troba als boscos de Minecraft?",
-"respuestas": [
-"Ovella",
-"Vaquet",
-"Gallina",
-"Porc"
-],
-"respuestaCorrecta": "Ovella"
-},
-{
-"pregunta": "Quin és el nom del bloc que permet al jugador emmagatzemar llibres encantats a Minecraft?",
-"respuestas": [
-"Estant de llibres",
-"Caixa de música",
-"Banc d'encantaments",
-"Pedestal de llibres"
-],
-"respuestaCorrecta": "Estant de llibres"
-},
-{
-"pregunta": "Quin bloc de Minecraft es pot utilitzar per a crear un portal a l'End?",
-"respuestas": [
-"Bastidor d'End",
-"Obsidiana",
-"Bloc de pedra de l'End",
-"Portal de l'End"
-],
-"respuestaCorrecta": "Bastidor d'End"
-},
-{
-"pregunta": "Quin objecte es necessita per convocar el Wither a Minecraft?",
-"respuestas": [
-"Ull d'Ender",
-"Esfera de Wither",
-"Cap d'esquelet de Wither",
-"Bloc de diamant"
-],
-"respuestaCorrecta": "Cap d'esquelet de Wither"
-},
-{
-"pregunta": "Quin tipus de bloc es pot utilitzar per a fabricar un encenedor a Minecraft?",
-"respuestas": [
-"Ferro",
-"Pedra",
-"Obsidiana",
-"Or"
-],
-"respuestaCorrecta": "Ferro"
-}
-    ]
+    "pregunta": "Quin és el nom de la criatura hostil que es troba a l'End a Minecraft?",
+    "respuestas": [
+    "Enderman",
+    "Shulker",
+    "Phantom",
+    "Vex"
+    ],
+    "respuestaCorrecta": "Shulker"
+    },
+    {
+    "pregunta": "Quin és el nom de la criatura que apareix a les fortificacions del Nether a Minecraft?",
+    "respuestas": [
+    "Wither Esquelet",
+    "Zombi piglin",
+    "Ghast",
+    "Blaze"
+    ],
+    "respuestaCorrecta": "Wither Esquelet"
+    },
+    {
+    "pregunta": "Quin tipus de bloc es pot utilitzar per a fabricar una tarta a Minecraft?",
+    "respuestas": [
+    "Sucre",
+    "Gra",
+    "Ou",
+    "Llet"
+    ],
+    "respuestaCorrecta": "Gra"
+    },
+    {
+    "pregunta": "Quin és el nom dels esdeveniments de redstone que poden ser generats per diferents causes a Minecraft?",
+    "respuestas": [
+    "Bucle de redstone",
+    "Senyal de redstone",
+    "Puls de redstone",
+    "Actuador de redstone"
+    ],
+    "respuestaCorrecta": "Senyal de redstone"
+    },
+    {
+    "pregunta": "Quin és el nom de la criatura pacífica que es troba als boscos de Minecraft?",
+    "respuestas": [
+    "Ovella",
+    "Vaquet",
+    "Gallina",
+    "Porc"
+    ],
+    "respuestaCorrecta": "Ovella"
+    },
+    {
+    "pregunta": "Quin és el nom del bloc que permet al jugador emmagatzemar llibres encantats a Minecraft?",
+    "respuestas": [
+    "Estant de llibres",
+    "Caixa de música",
+    "Banc d'encantaments",
+    "Pedestal de llibres"
+    ],
+    "respuestaCorrecta": "Estant de llibres"
+    },
+    {
+    "pregunta": "Quin bloc de Minecraft es pot utilitzar per a crear un portal a l'End?",
+    "respuestas": [
+    "Bastidor d'End",
+    "Obsidiana",
+    "Bloc de pedra de l'End",
+    "Portal de l'End"
+    ],
+    "respuestaCorrecta": "Bastidor d'End"
+    },
+    {
+    "pregunta": "Quin objecte es necessita per convocar el Wither a Minecraft?",
+    "respuestas": [
+    "Ull d'Ender",
+    "Esfera de Wither",
+    "Cap d'esquelet de Wither",
+    "Bloc de diamant"
+    ],
+    "respuestaCorrecta": "Cap d'esquelet de Wither"
+    },
+    {
+    "pregunta": "Quin tipus de bloc es pot utilitzar per a fabricar un encenedor a Minecraft?",
+    "respuestas": [
+    "Ferro",
+    "Pedra",
+    "Obsidiana",
+    "Or"
+    ],
+    "respuestaCorrecta": "Ferro"
+    },
+    {
+    "pregunta": "Quin és el nom del bioma de bolets a Minecraft?",
+    "respuestas": [
+    "Boletòpolis",
+    "Bosc encantat",
+    "Mushroom Island",
+    "Terra de bolets"
+    ],
+    "respuestaCorrecta": "Mushroom Island"
+    },
+    {
+    "pregunta": "Quin objecte és necessari per crear una bengala a Minecraft?",
+    "respuestas": [
+    "Polvora",
+    "Sucre",
+    "Cristall",
+    "Diamant"
+    ],
+    "respuestaCorrecta": "Polvora"
+    },
+    {
+    "pregunta": "Quin objecte es pot utilitzar per crear una poció de visió nocturna a Minecraft?",
+    "respuestas": [
+    "Ull d'Ender",
+    "Ull de Spider",
+    "Zanahoria daurada",
+    "Ull de peix"
+    ],
+    "respuestaCorrecta": "Zanahoria daurada"
+    },
+    {
+    "pregunta": "Quin és el nom de la criatura hostil que apareix a les profunditats de l'oceà a Minecraft?",
+    "respuestas": [
+    "Drowned",
+    "Guardià",
+    "Phantom",
+    "Trident"
+    ],
+    "respuestaCorrecta": "Drowned"
+    },
+    {
+    "pregunta": "Quina criatura apareix a l'End quan es destrueixen els cristalls d'ender?",
+    "respuestas": [
+    "Ender Dragon",
+    "Shulker",
+    "Endermite",
+    "Enderman"
+    ],
+    "respuestaCorrecta": "Ender Dragon"
+    },
+    {
+    "pregunta": "Quin és el nom de la criatura pacífica que ajuda a mantenir l'ecosistema dels boscos de Minecraft?",
+    "respuestas": [
+    "Abella",
+    "Ovella",
+    "Gallina",
+    "Vaquet"
+    ],
+    "respuestaCorrecta": "Abella"
+    },
+    {
+    "pregunta": "Quin és el nom del bloc que permet al jugador intercanviar objectes amb els aldeans a Minecraft?",
+    "respuestas": [
+    "Estant de llibres",
+    "Taulell de comerç",
+    "Banc d'encantaments",
+    "Forja"
+    ],
+    "respuestaCorrecta": "Taulell de comerç"
+    },
+    {
+    "pregunta": "Quina criatura hostil pot volar i disparar proyectils a Minecraft?",
+    "respuestas": [
+    "Blaze",
+    "Ghast",
+    "Phantom",
+    "Vex"
+    ],
+    "respuestaCorrecta": "Ghast"
+    },
+    {
+    "pregunta": "Quin objecte es necessita per crear una poció de força a Minecraft?",
+    "respuestas": [
+    "Blaze Rod",
+    "Blaze Powder",
+    "Magma Cream",
+    "Nether Wart"
+    ],
+        "respuestaCorrecta": "Blaze Powder"
+    }
+]
 }

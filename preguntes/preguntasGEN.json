@@ -239,6 +239,226 @@
               "Sarah"
             ],
             "respuestaCorrecta": "Joel"
-          }
+          },
+          {
+            "pregunta": "Quin videojoc de 2013 presenta als personatges Joel i Ellie en un món postapocalíptic?",
+            "respuestas": [
+            "The Walking Dead",
+            "The Last of Us",
+            "Left 4 Dead",
+            "Dead Island"
+            ],
+            "respuestaCorrecta": "The Last of Us"
+            },
+            {
+            "pregunta": "Quin videojoc de 1998 va ser desenvolupat per Valve Corporation i es considera un dels millors jocs de tots els temps?",
+            "respuestas": [
+            "Doom",
+            "Quake",
+            "Half-Life",
+            "Unreal Tournament"
+            ],
+            "respuestaCorrecta": "Half-Life"
+            },
+            {
+            "pregunta": "Quin és el nom del desenvolupador principal de la saga de videojocs Metal Gear?",
+            "respuestas": [
+            "Shigeru Miyamoto",
+            "Hideo Kojima",
+            "Hideki Kamiya",
+            "Ken Levine"
+            ],
+            "respuestaCorrecta": "Hideo Kojima"
+            },
+            {
+            "pregunta": "Quin videojoc de lluita va ser creat per Masahiro Sakurai i presenta personatges de diferents franquícies de Nintendo?",
+            "respuestas": [
+            "Mortal Kombat",
+            "Street Fighter",
+            "Tekken",
+            "Super Smash Bros."
+            ],
+            "respuestaCorrecta": "Super Smash Bros."
+            },
+            {
+            "pregunta": "Quin videojoc de 2000 permet als jugadors controlar personatges humans i aliens en un món obert de ciència-ficció?",
+            "respuestas": [
+            "System Shock 2",
+            "Deus Ex",
+            "Half-Life 2",
+            "Mass Effect"
+            ],
+            "respuestaCorrecta": "Deus Ex"
+            },
+            {
+            "pregunta": "Quin videojoc va ser desenvolupat per Irrational Games i es va llançar el 2007, ambientat en una ciutat submarina?",
+            "respuestas": [
+            "BioShock",
+            "Fallout 3",
+            "Half-Life 2",
+            "S.T.A.L.K.E.R."
+            ],
+            "respuestaCorrecta": "BioShock"
+            },
+            {
+            "pregunta": "Quin videojoc de 2011, desenvolupat per FromSoftware, és conegut per la seva alta dificultat i ambientació fosca?",
+            "respuestas": [
+            "Demon's Souls",
+            "Dark Souls",
+            "Bloodborne",
+            "Sekiro: Shadows Die Twice"
+            ],
+            "respuestaCorrecta": "Dark Souls"
+            },
+            {
+            "pregunta": "Quin videojoc de 2010, desenvolupat per Playdead, presenta un nen sense nom que explora un ambient en blanc i negre?",
+            "respuestas": [
+            "Braid",
+            "Limbo",
+            "Inside",
+            "Fez"
+            ],
+            "respuestaCorrecta": "Limbo"
+            },
+            {
+              "pregunta": "Quin videojoc de 2008, desenvolupat per Rockstar Games, segueix la història d'un immigrant anomenat Niko Bellic?",
+              "respuestas": [
+              "Grand Theft Auto IV",
+              "Mafia II",
+              "Saints Row 2",
+              "Sleeping Dogs"
+              ],
+              "respuestaCorrecta": "Grand Theft Auto IV"
+              },
+              {
+              "pregunta": "Quin videojoc de 2012, desenvolupat per Telltale Games, es basa en una popular sèrie de còmics i programa de televisió?",
+              "respuestas": [
+              "The Walking Dead",
+              "Game of Thrones",
+              "Breaking Bad",
+              "Mad Men"
+              ],
+              "respuestaCorrecta": "The Walking Dead"
+              },
+              {
+              "pregunta": "Quin videojoc, llançat per primera vegada l'any 2000, és una sèrie de jocs de rol en línia massius multijugador (MMORPG) desenvolupada per Square Enix?",
+              "respuestas": [
+              "World of Warcraft",
+              "Guild Wars",
+              "Final Fantasy XI",
+              "The Elder Scrolls Online"
+              ],
+              "respuestaCorrecta": "Final Fantasy XI"
+              },
+              {
+              "pregunta": "Quin videojoc de 1997, desenvolupat per DMA Design (ara Rockstar North), va ser el primer títol de la sèrie que va donar lloc a un gran èxit?",
+              "respuestas": [
+              "Grand Theft Auto",
+              "Driver",
+              "Carmageddon",
+              "Midtown Madness"
+              ],
+              "respuestaCorrecta": "Grand Theft Auto"
+              },
+              {
+              "pregunta": "Quin videojoc de 2011, desenvolupat per Bethesda Game Studios, presenta un món de fantasia obert amb dracs i criatures mítiques?",
+              "respuestas": [
+              "The Witcher 2",
+              "Dragon Age: Inquisition",
+              "The Elder Scrolls V: Skyrim",
+              "Middle-earth: Shadow of Mordor"
+              ],
+              "respuestaCorrecta": "The Elder Scrolls V: Skyrim"
+              },
+              {
+              "pregunta": "Quin videojoc de 2014, desenvolupat per Ubisoft, permet als jugadors controlar un hacker anomenat Aiden Pearce en una versió virtual de Chicago?",
+              "respuestas": [
+              "Watch Dogs",
+              "Assassin's Creed IV: Black Flag",
+              "Far Cry 4",
+              "The Division"
+              ],
+              "respuestaCorrecta": "Watch Dogs"
+              },
+              {
+              "pregunta": "Quin videojoc de 2007, desenvolupat per 2K Games, es basa en una illa tropical infestada de zombies?",
+              "respuestas": [
+              "Dead Island",
+              "Dying Light",
+              "State of Decay",
+              "Left 4 Dead"
+              ],
+              "respuestaCorrecta": "Dead Island"
+              },
+              {
+                "pregunta": "Quin videojoc de 2004, desenvolupat per Blizzard Entertainment, és considerat un dels MMORPG més populars i influents de tots els temps?",
+                "respuestas": [
+                "World of Warcraft",
+                "Guild Wars",
+                "EverQuest",
+                "RuneScape"
+                ],
+                "respuestaCorrecta": "World of Warcraft"
+                },
+                {
+                "pregunta": "Quin videojoc de 1991, desenvolupat per Nintendo, va introduir el personatge de Yoshi i permet als jugadors controlar Mario en una aventura per salvar la Princesa Peach?",
+                "respuestas": [
+                "Super Mario Bros. 3",
+                "Super Mario World",
+                "Super Mario 64",
+                "Super Mario Galaxy"
+                ],
+                "respuestaCorrecta": "Super Mario World"
+                },
+                {
+                "pregunta": "Quin videojoc de 2013, desenvolupat per Naughty Dog, va ser llançat com una expansió independent de The Last of Us i es centra en la història d'Ellie?",
+                "respuestas": [
+                "The Last of Us: Left Behind",
+                "The Last of Us: American Dreams",
+                "The Last of Us: Part II",
+                "The Last of Us: Remastered"
+                ],
+                "respuestaCorrecta": "The Last of Us: Left Behind"
+                },
+                {
+                "pregunta": "Quin videojoc de 1987, desenvolupat per Capcom, va introduir el personatge de Mega Man i el seu enfrontament amb el Dr. Wily?",
+                "respuestas": [
+                "Mega Man",
+                "Metroid",
+                "Contra",
+                "Castlevania"
+                ],
+                "respuestaCorrecta": "Mega Man"
+                },
+                {
+                "pregunta": "Quin videojoc de 2016, desenvolupat per Blizzard Entertainment, és un joc de trets en primera persona amb un gran èxit que presenta diversos herois amb habilitats úniques?",
+                "respuestas": [
+                "Overwatch",
+                "Paladins",
+                "Battleborn",
+                "Team Fortress 2"
+                ],
+                "respuestaCorrecta": "Overwatch"
+                },
+                {
+                "pregunta": "Quin videojoc de 2015, desenvolupat per CD Projekt Red, segueix la història del bruixot Geralt de Rivia en la seva recerca per trobar a Ciri?",
+                "respuestas": [
+                "The Witcher",
+                "The Witcher 2: Assassins of Kings",
+                "The Witcher 3: Wild Hunt",
+                "The Witcher: Blood and Wine"
+                ],
+                "respuestaCorrecta": "The Witcher 3: Wild Hunt"
+                },
+                {
+                "pregunta": "Quin videojoc de 2007, desenvolupat per Valve Corporation, és una continuació de la sèrie Half-Life i segueix a Gordon Freeman en la seva lluita contra les forces extraterrestres?",
+                "respuestas": [
+                "Half-Life",
+                "Half-Life 2",
+                "Half-Life 2: Episode One",
+                "Half-Life 2: Episode Two"
+                ],
+                "respuestaCorrecta": "Half-Life 2: Episode Two"
+                }
     ]
 }

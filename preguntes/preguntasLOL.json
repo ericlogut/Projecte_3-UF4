@@ -339,6 +339,206 @@
                 "Heimerdinger"
             ],
             "respuestaCorrecta": "Ziggs"
-        }
+        },
+        {
+            "pregunta": "Quin és el nom del campió que ha estat recreat més vegades a League of Legends?",
+            "respuestas": [
+            "Ryze",
+            "Garen",
+            "Ashe",
+            "Warwick"
+            ],
+            "respuestaCorrecta": "Ryze"
+            },
+            {
+            "pregunta": "Quin és el nom del campió que pot controlar el temps a League of Legends?",
+            "respuestas": [
+            "Ekko",
+            "Zilean",
+            "Syndra",
+            "Orianna"
+            ],
+            "respuestaCorrecta": "Zilean"
+            },
+            {
+            "pregunta": "Quin objecte de la botiga és considerat un objecte de broma pels jugadors?",
+            "respuestas": [
+            "Espasa de la divinitat",
+            "Bacallà",
+            "Relicari de Rabadon",
+            "Visió de la llum"
+            ],
+            "respuestaCorrecta": "Espasa de la divinitat"
+            },
+            {
+            "pregunta": "Quin campió de League of Legends és conegut com 'El Genet sense Cap'?",
+            "respuestas": [
+            "Hecarim",
+            "Nocturne",
+            "Fiddlesticks",
+            "Thresh"
+            ],
+            "respuestaCorrecta": "Hecarim"
+            },
+            {
+            "pregunta": "Quina és la primera cinemàtica oficial de League of Legends?",
+            "respuestas": [
+            "A Twist of Fate",
+            "Dominion",
+            "The Harrowing",
+            "Season One"
+            ],
+            "respuestaCorrecta": "A Twist of Fate"
+            },
+            {
+            "pregunta": "Quina és la primera línia de skins temàtica creada per Riot Games?",
+            "respuestas": [
+            "Skins de Commando",
+            "Skins de Piltover Customs",
+            "Skins de Pentakill",
+            "Skins de Pool Party"
+            ],
+            "respuestaCorrecta": "Skins de Commando"
+            },
+            {
+            "pregunta": "Quin és el nom del camí del mapa de Summoner's Rift on es troben els magos i els tiradors?",
+            "respuestas": [
+            "Top Lane",
+            "Mid Lane",
+            "Bot Lane",
+            "Jungle"
+            ],
+            "respuestaCorrecta": "Bot Lane"
+            },
+            {
+            "pregunta": "Quin campió de League of Legends és conegut com a 'La Mà dels Déus'?",
+            "respuestas": [
+            "Nasus",
+            "Xerath",
+            "Azir",
+            "Renekton"
+            ],
+            "respuestaCorrecta": "Nasus"
+            },
+            {
+            "pregunta": "Quin és el nom de la màgia que pot fer reviure un campió a League of Legends?",
+            "respuestas": [
+            "Curar",
+            "Reviure",
+            "Clarividència",
+            "Teleport"
+            ],
+            "respuestaCorrecta": "Reviure"
+            },
+            {
+            "pregunta": "Quin és el nom de la primera campiona femenina de League of Legends?",
+            "respuestas": [
+            "Ashe",
+            "Annie",
+            "Sivir",
+            "Kayle"
+            ],
+            "respuestaCorrecta": "Ashe"
+            },
+            {
+                "pregunta": "Quin campió de League of Legends és conegut com 'El Saltamontes dels Vents'?",
+                "respuestas": [
+                "Yasuo",
+                "Riven",
+                "Yone",
+                "Zed"
+                ],
+                "respuestaCorrecta": "Yasuo"
+                },
+                {
+                "pregunta": "Quina criatura neutral de la jungla proporciona un buff de regeneració de mana?",
+                "respuestas": [
+                "Krugs",
+                "Gromp",
+                "Súcub azul",
+                "Súcub vermell"
+                ],
+                "respuestaCorrecta": "Súcub azul"
+                },
+                {
+                "pregunta": "Quina és la màxima quantitat de cops d'atac que pot acumular la passiva de Guinsoo's Rageblade?",
+                "respuestas": [
+                "2",
+                "3",
+                "4",
+                "6"
+                ],
+                "respuestaCorrecta": "6"
+                },
+                {
+                "pregunta": "Quin campió de League of Legends és conegut com 'El Solari de Ferro'?",
+                "respuestas": [
+                "Leona",
+                "Diana",
+                "Taric",
+                "Pantheon"
+                ],
+                "respuestaCorrecta": "Leona"
+                },
+                {
+                "pregunta": "Quin és el nom de la lliga més alta del sistema de classificació de League of Legends?",
+                "respuestas": [
+                "Platí",
+                "Diamant",
+                "Màster",
+                "Desafiament"
+                ],
+                "respuestaCorrecta": "Desafiament"
+                },
+                {
+                "pregunta": "Quin és el nom del campió que pot transformar-se en una forma de drac?",
+                "respuestas": [
+                "Aurelion Sol",
+                "Shyvana",
+                "Galio",
+                "Anivia"
+                ],
+                "respuestaCorrecta": "Shyvana"
+                },
+                {
+                "pregunta": "Quina és la regió d'origen de la majoria dels yordles?",
+                "respuestas": [
+                "Noxus",
+                "Demacia",
+                "Piltover",
+                "Bandle City"
+                ],
+                "respuestaCorrecta": "Bandle City"
+                },
+                {
+                "pregunta": "Quina és la funció principal del rol d'enguaitador (warder) en una partida de League of Legends?",
+                "respuestas": [
+                "Controlar la visió",
+                "Infligir dany",
+                "Suportar els companys",
+                "Recuperar vida"
+                ],
+                "respuestaCorrecta": "Controlar la visió"
+                },
+                {
+                "pregunta": "Quin campió és el germà perdut de Darius?",
+                "respuestas": [
+                "Swain",
+                "Draven",
+                "Garen",
+                "Sion"
+                ],
+                "respuestaCorrecta": "Draven"
+                },
+                {
+                "pregunta": "Quin és el nom de l'arma que utilitza Jax?",
+                "respuestas": [
+                "Llum de l'Argent",
+                "Estac dels Déus",
+                "Pilum",
+                "Llum de Lluna"
+                ],
+                "respuestaCorrecta": "Estac dels Déus"
+                }
     ]
 }
